@@ -18,6 +18,8 @@ public class Song
     public IFormFile? ThumbnailFile { get; set; } = null;
     [Required]
     public string MP3Url { get; set; } = String.Empty;
+    [NotMapped]
+    public IFormFile? MP3File { get; set; } = null;
     
     public DateTime ReleaseDate { get; set; } 
     [Required]

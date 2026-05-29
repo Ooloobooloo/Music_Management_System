@@ -16,22 +16,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c68eb64f-76a7-4962-8df7-842505f39a63" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Music_Management_System/Data/DbInitializer.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Music_Management_System/Helpers/CloudinarySettings.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Music_Management_System/Interfaces/IMP3Services.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Music_Management_System/Interfaces/IPhotoService.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Music_Management_System/Services/MP3Service.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Music_Management_System/Services/PhotoService.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Music_Management_System/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Music_Management_System/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Music_Management_System/Migrations/20260529121144_InitialCreate.Designer.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Music_Management_System/Migrations/20260529121144_InitialCreate.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Music_Management_System/Migrations/AppDbContextModelSnapshot.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Music_Management_System/Models/Composer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Music_Management_System/Models/Composer.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Music_Management_System/Models/Singer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Music_Management_System/Models/Singer.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Music_Management_System/Models/Song.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Music_Management_System/Models/Song.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Music_Management_System/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Music_Management_System/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Music_Management_System/Views/Composer/Create.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/Music_Management_System/Views/Composer/Create.cshtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Music_Management_System/Views/Composer/Index.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/Music_Management_System/Views/Composer/Index.cshtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Music_Management_System/Views/Shared/_Layout.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/Music_Management_System/Views/Shared/_Layout.cshtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Music_Management_System/Views/Singer/Create.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/Music_Management_System/Views/Singer/Create.cshtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Music_Management_System/Views/Singer/Index.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/Music_Management_System/Views/Singer/Index.cshtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Music_Management_System/Views/Song/Create.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/Music_Management_System/Views/Song/Create.cshtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Music_Management_System/Views/Song/Index.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/Music_Management_System/Views/Song/Index.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Music_Management_System/appsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/Music_Management_System/appsettings.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,7 +42,7 @@
             <option name="modeId" value="Ask" />
             <option name="modelType" value="builtin_family" />
             <option name="modelValue" value="auto" />
-            <option name="status" value="Processing" />
+            <option name="status" value="Completed" />
             <option name="targetType" value="LOCAL" />
           </session>
           <session>
@@ -102,9 +95,13 @@
     <setting file="file://$PROJECT_DIR$/Music_Management_System/Controllers/SingerController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Music_Management_System/Data/AppDbContext.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Music_Management_System/Data/DbInitializer.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Music_Management_System/Interfaces/IMP3Services.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Music_Management_System/Interfaces/IPhotoService.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Music_Management_System/Models/Composer.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Music_Management_System/Models/Singer.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Music_Management_System/Models/Song.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Music_Management_System/Services/MP3Service.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Music_Management_System/Services/PhotoService.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="McpProjectServerCommands">
     <commands />
@@ -218,7 +215,7 @@
       <option name="presentableId" value="Default" />
       <updated>1780054445530</updated>
       <workItem from="1780054455743" duration="2622000" />
-      <workItem from="1780057142439" duration="3001000" />
+      <workItem from="1780057142439" duration="4519000" />
     </task>
     <task id="LOCAL-00001" summary="First Commit">
       <option name="closed" value="true" />
@@ -260,7 +257,39 @@
       <option name="project" value="LOCAL" />
       <updated>1780057362475</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Change in Layout/Seeding data">
+      <option name="closed" value="true" />
+      <created>1780060263450</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1780060263450</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Change in Data&#10; Seeding policy">
+      <option name="closed" value="true" />
+      <created>1780060298673</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1780060298673</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Change in Data&#10; Seeding policy">
+      <option name="closed" value="true" />
+      <created>1780060313197</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1780060313197</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Change in Data Seeding policy">
+      <option name="closed" value="true" />
+      <created>1780060335474</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1780060335474</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -275,7 +304,10 @@
     <MESSAGE value="Models Created" />
     <MESSAGE value="Controllers Completed using Scaffolding Feature" />
     <MESSAGE value="Views Prototype Completed" />
-    <option name="LAST_COMMIT_MESSAGE" value="Views Prototype Completed" />
+    <MESSAGE value="Change in Layout/Seeding data" />
+    <MESSAGE value="Change in Data&#10; Seeding policy" />
+    <MESSAGE value="Change in Data Seeding policy" />
+    <option name="LAST_COMMIT_MESSAGE" value="Change in Data Seeding policy" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
