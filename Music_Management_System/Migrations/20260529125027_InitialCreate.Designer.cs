@@ -12,7 +12,7 @@ using Music_Management_System.Data;
 namespace Music_Management_System.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20260529121144_InitialCreate")]
+    [Migration("20260529125027_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -38,7 +38,6 @@ namespace Music_Management_System.Migrations
                         .HasColumnType("longtext");
 
                     b.Property<string>("ImageUrl")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("Name")

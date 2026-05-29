@@ -35,7 +35,6 @@ namespace Music_Management_System.Migrations
                         .HasColumnType("longtext");
 
                     b.Property<string>("ImageUrl")
-                        .IsRequired()
                         .HasColumnType("longtext");
 
                     b.Property<string>("Name")

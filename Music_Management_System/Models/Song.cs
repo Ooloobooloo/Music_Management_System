@@ -12,7 +12,7 @@ public class Song
     public string Title { get; set; } = String.Empty;
     [Required]
     public string Lyrics { get; set; } = String.Empty;
-    [Required]
+    
     public string ThumbnailUrl { get; set; } = String.Empty;
     [NotMapped]
     public IFormFile? ThumbnailFile { get; set; } = null;

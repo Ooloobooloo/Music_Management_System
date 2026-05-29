@@ -1,5 +1,37 @@
 @model Music_Management_System.Models.Singer
 
+@section Scripts {
+    <!-- Nhúng thư viện CKEditor 5 từ CDN -->
+    <script src="https://cdn.ckeditor.com/ckeditor5/41.0.0/classic/ckeditor.js"></script>
+
+    <script>
+        ClassicEditor
+            .create(document.querySelector('#editor'), {
+                // Cấu hình các công cụ hiển thị trên thanh toolbar (tùy chọn)
+                toolbar: ['heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', 'blockQuote', 'insertTable', 'undo', 'redo']
+            })
+            .then(editor => {
+                console.log('Editor was initialized', editor);
+            })
+            .catch(error => {
+                console.error(error);
+            });
+    </script>
+    <style>
+        /* Tùy chỉnh kích thước của CKEditor */
+        .ck-editor__editable {
+            min-height: 200px; /* Điều chỉnh chiều cao tối thiểu */
+            min-width: 100%; max-width: 100%;
+        }
+    </style>
+    <!-- Đừng quên nhúng script validation mặc định của .NET -->
+    <partial name="_ValidationScriptsPartial" />
+}
+
+
+
+
+
 @{
     ViewData["Title"] = "Create";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -10,7 +42,7 @@
 <h4>Singer</h4>
 <hr />
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-9">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
@@ -20,7 +52,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="Biography" class="control-label"></label>
-                <input asp-for="Biography" class="form-control" />
+                <textarea asp-for="Biography" class="form-control" id="editor"></textarea>
                 <span asp-validation-for="Biography" class="text-danger"></span>
             </div>
             <div class="form-group">

@@ -16,15 +16,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c68eb64f-76a7-4962-8df7-842505f39a63" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Music_Management_System/Data/AppDbContext.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Music_Management_System/Data/DbInitializer.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Music_Management_System/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Music_Management_System/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Music_Management_System/Controllers/HomeController.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Music_Management_System/Migrations/20260529121144_InitialCreate.Designer.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Music_Management_System/Migrations/20260529121144_InitialCreate.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Music_Management_System/Migrations/AppDbContextModelSnapshot.cs" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Music_Management_System/Models/Composer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Music_Management_System/Models/Composer.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Music_Management_System/Models/Singer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Music_Management_System/Models/Singer.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Music_Management_System/Music_Management_System.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Music_Management_System/Music_Management_System.csproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Music_Management_System/Models/Song.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Music_Management_System/Models/Song.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Music_Management_System/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Music_Management_System/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Music_Management_System/Views/Home/Index.cshtml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Music_Management_System/Views/Home/Privacy.cshtml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Music_Management_System/Views/Composer/Create.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/Music_Management_System/Views/Composer/Create.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Music_Management_System/Views/Composer/Index.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/Music_Management_System/Views/Composer/Index.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Music_Management_System/Views/Shared/_Layout.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/Music_Management_System/Views/Shared/_Layout.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Music_Management_System/Views/Singer/Create.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/Music_Management_System/Views/Singer/Create.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Music_Management_System/Views/Singer/Index.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/Music_Management_System/Views/Singer/Index.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Music_Management_System/Views/Song/Create.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/Music_Management_System/Views/Song/Create.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Music_Management_System/Views/Song/Index.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/Music_Management_System/Views/Song/Index.cshtml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,11 +41,20 @@
   <component name="CopilotChats">
     <option name="panelChat">
       <chat>
-        <option name="activeSessionId" value="639aeb1a-e69a-44dd-84f0-e745e67a6dd5" />
+        <option name="activeSessionId" value="f46a52c4-1407-41c3-b4ff-bad78bf80946" />
         <option name="sessions">
           <session>
             <option name="chatType" value="PANEL" />
             <option name="id" value="639aeb1a-e69a-44dd-84f0-e745e67a6dd5" />
+            <option name="modeId" value="Ask" />
+            <option name="modelType" value="builtin_family" />
+            <option name="modelValue" value="auto" />
+            <option name="status" value="Processing" />
+            <option name="targetType" value="LOCAL" />
+          </session>
+          <session>
+            <option name="chatType" value="PANEL" />
+            <option name="id" value="f46a52c4-1407-41c3-b4ff-bad78bf80946" />
             <option name="modeId" value="Ask" />
             <option name="modelType" value="builtin_family" />
             <option name="modelValue" value="auto" />
@@ -54,11 +70,17 @@
       <entry key="_D:/FptAptech/.Net_All_Star/Music_Management_System" value="3EOfGmBwIxeIJY61ipHLhJ6aAJW" />
     </persistenceIdMap>
   </component>
+  <component name="CopilotUserSelectedModel">
+    <selectedModels>
+      <entry key="agent-panel" value="Auto" />
+      <entry key="chat-panel" value="Auto" />
+    </selectedModels>
+  </component>
   <component name="DpaMonitoringSettings">
     <option name="firstShow" value="false" />
   </component>
   <component name="EmbeddingIndexingInfo">
-    <option name="cachedIndexableFilesCount" value="76" />
+    <option name="cachedIndexableFilesCount" value="4" />
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -79,6 +101,7 @@
     <setting file="file://$PROJECT_DIR$/Music_Management_System/Controllers/ComposerController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Music_Management_System/Controllers/SingerController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Music_Management_System/Data/AppDbContext.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Music_Management_System/Data/DbInitializer.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Music_Management_System/Models/Composer.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Music_Management_System/Models/Singer.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Music_Management_System/Models/Song.cs" root0="FORCE_HIGHLIGHTING" />
@@ -93,6 +116,20 @@
   &quot;fromUser&quot;: false
 }</component>
   <component name="ProjectId" id="3EOfGmBwIxeIJY61ipHLhJ6aAJW" />
+  <component name="ProjectSessionTemplates">
+    <option name="panelTemplate">
+      <template>
+        <option name="modeId" value="Ask" />
+        <option name="model">
+          <model>
+            <option name="modelType" value="builtin_family" />
+            <option name="modelValue" value="auto" />
+          </model>
+        </option>
+        <option name="targetType" value="LOCAL" />
+      </template>
+    </option>
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -181,6 +218,7 @@
       <option name="presentableId" value="Default" />
       <updated>1780054445530</updated>
       <workItem from="1780054455743" duration="2622000" />
+      <workItem from="1780057142439" duration="3001000" />
     </task>
     <task id="LOCAL-00001" summary="First Commit">
       <option name="closed" value="true" />
@@ -206,7 +244,23 @@
       <option name="project" value="LOCAL" />
       <updated>1780056164661</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Controllers Completed using Scaffolding Feature">
+      <option name="closed" value="true" />
+      <created>1780057303466</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1780057303466</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Views Prototype Completed">
+      <option name="closed" value="true" />
+      <created>1780057362475</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1780057362475</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -219,7 +273,9 @@
     <MESSAGE value="First Commit" />
     <MESSAGE value="2nd Commit" />
     <MESSAGE value="Models Created" />
-    <option name="LAST_COMMIT_MESSAGE" value="Models Created" />
+    <MESSAGE value="Controllers Completed using Scaffolding Feature" />
+    <MESSAGE value="Views Prototype Completed" />
+    <option name="LAST_COMMIT_MESSAGE" value="Views Prototype Completed" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

@@ -25,7 +25,7 @@ namespace Music_Management_System.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Biography = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    ImageUrl = table.Column<string>(type: "longtext", nullable: false)
+                    ImageUrl = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4")
                 },
                 constraints: table =>

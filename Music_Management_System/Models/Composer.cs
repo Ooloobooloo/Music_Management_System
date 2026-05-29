@@ -16,8 +16,8 @@ public class Composer
     [Required] 
     public string Biography { get; set; } = string.Empty;
    
-    [Required]
-    public string ImageUrl { get; set; } = string.Empty;
+    
+    public string? ImageUrl { get; set; } = string.Empty;
    
     [NotMapped]
     public IFormFile? ImageFile { get; set; } = null;
