@@ -1,0 +1,77 @@
+@model Music_Management_System.Models.Song
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Edit</h1>
+
+<h4>Song</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="Title" class="control-label"></label>
+                <input asp-for="Title" class="form-control" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Lyrics" class="control-label"></label>
+                <input asp-for="Lyrics" class="form-control" />
+                <span asp-validation-for="Lyrics" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ThumbnailUrl" class="control-label"></label>
+                <input asp-for="ThumbnailUrl" class="form-control" />
+                <span asp-validation-for="ThumbnailUrl" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MP3Url" class="control-label"></label>
+                <input asp-for="MP3Url" class="form-control" />
+                <span asp-validation-for="MP3Url" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ReleaseDate" class="control-label"></label>
+                <input asp-for="ReleaseDate" class="form-control" />
+                <span asp-validation-for="ReleaseDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CreatedAt" class="control-label"></label>
+                <input asp-for="CreatedAt" class="form-control" />
+                <span asp-validation-for="CreatedAt" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UpdatedAt" class="control-label"></label>
+                <input asp-for="UpdatedAt" class="form-control" />
+                <span asp-validation-for="UpdatedAt" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SingerId" class="control-label"></label>
+                <select asp-for="SingerId" class="form-control" asp-items="ViewBag.SingerId"></select>
+                <span asp-validation-for="SingerId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ComposerId" class="control-label"></label>
+                <select asp-for="ComposerId" class="form-control" asp-items="ViewBag.ComposerId"></select>
+                <span asp-validation-for="ComposerId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Status" class="control-label"></label>
+                <input asp-for="Status" class="form-control" />
+                <span asp-validation-for="Status" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
