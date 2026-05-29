@@ -15,7 +15,9 @@
     <configurations />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c68eb64f-76a7-4962-8df7-842505f39a63" name="Changes" comment="" />
+    <list default="true" id="c68eb64f-76a7-4962-8df7-842505f39a63" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/Music_Management_System/Services/MP3Service.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Music_Management_System/Services/MP3Service.cs" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -205,7 +207,7 @@
       <option name="presentableId" value="Default" />
       <updated>1780054445530</updated>
       <workItem from="1780054455743" duration="2622000" />
-      <workItem from="1780057142439" duration="4834000" />
+      <workItem from="1780057142439" duration="5228000" />
     </task>
     <task id="LOCAL-00001" summary="First Commit">
       <option name="closed" value="true" />
@@ -287,7 +289,23 @@
       <option name="project" value="LOCAL" />
       <updated>1780061719087</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Change in Uploading Procedure">
+      <option name="closed" value="true" />
+      <created>1780062134046</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1780062134046</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Service Update">
+      <option name="closed" value="true" />
+      <created>1780062194400</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1780062194400</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -306,7 +324,9 @@
     <MESSAGE value="Change in Data&#10; Seeding policy" />
     <MESSAGE value="Change in Data Seeding policy" />
     <MESSAGE value="Adding Image/Audio Upload" />
-    <option name="LAST_COMMIT_MESSAGE" value="Adding Image/Audio Upload" />
+    <MESSAGE value="Change in Uploading Procedure" />
+    <MESSAGE value="Service Update" />
+    <option name="LAST_COMMIT_MESSAGE" value="Service Update" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
