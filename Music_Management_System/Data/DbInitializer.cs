@@ -37,43 +37,46 @@ public static class DbInitializer
 
     private static void SeedData(AppDbContext context)
     {
-        if (!context.Composers.Any())
+        private static void SeedData(AppDbContext context)
+{
+    if (!context.Composers.Any())
+    {
+        context.Composers.AddRange(new List<Composer>
         {
-            context.Composers.AddRange(new List<Composer>
-            {
-                new Composer { Name = "Big Chungus", Biography = " Born in 1926" },
-                new Composer { Name = "Lil'Chungus", Biography = "Born in 1926" },
-                new Composer { Name = "Medium-size Chungus", Biography = "Born in 1926" },
-                new Composer { Name = "Slow Chungus", Biography = "Born in 1926" },
-                new Composer { Name = "Fast Chungus", Biography = "Born in 1926" }
-            });
-            if (!context.Singers.Any())
-            {
-                context.Singers.AddRange(new List<Singer>
-                {
-                    new Singer { Name = "Big Bingus", Biography = " Born in 1926" },
-                    new Singer { Name = "Lil' Bingus", Biography = "Born in 1926" },
-                    new Singer { Name = "Medium-size Bingus", Biography = "Born in 1926" },
-                    new Singer { Name = "Fast Bingus", Biography = "Born in 1926" },
-                    new Singer { Name = "Slow Bingus", Biography = "Born in 1926" }
+            new Composer { Name = "Big Chungus", Biography = " Born in 1926" },
+            new Composer { Name = "Lil'Chungus", Biography = "Born in 1926" },
+            new Composer { Name = "Medium-size Chungus", Biography = "Born in 1926" },
+            new Composer { Name = "Slow Chungus", Biography = "Born in 1926" },
+            new Composer { Name = "Fast Chungus", Biography = "Born in 1926" }
+        });
+        context.SaveChanges();
+    }
 
-                });
+    if (!context.Singers.Any())
+    {
+        context.Singers.AddRange(new List<Singer>
+        {
+            new Singer { Name = "Big Bingus", Biography = " Born in 1926" },
+            new Singer { Name = "Lil' Bingus", Biography = "Born in 1926" },
+            new Singer { Name = "Medium-size Bingus", Biography = "Born in 1926" },
+            new Singer { Name = "Fast Bingus", Biography = "Born in 1926" },
+            new Singer { Name = "Slow Bingus", Biography = "Born in 1926" }
+        });
+        context.SaveChanges();
+    }
 
-        if (!context.Songs.Any())
-                {
-                    context.Songs.AddRange(new List<Song>
-                    {
-                        new Song { Title = "Z", Lyrics = " Funk", },
-                        new Song { Title = "ZZZZ", Lyrics = "Born in 1926" },
-                        new Song { Title = "ZZZZZZZ", Lyrics = "Born in 1926" },
-                        new Song { Title = "ZZZZZZZ", Lyrics = "Born in 1926" },
-                        new Song { Title = "ZZZZZZZZ", Lyrics = "Born in 1926" }
-                    });
-
-
-                    context.SaveChanges();
-                }
-            }
-        }
+    if (!context.Songs.Any())
+    {
+        context.Songs.AddRange(new List<Song>
+        {
+            new Song { Title = "Z", Lyrics = " Funk", },
+            new Song { Title = "ZZZZ", Lyrics = "Born in 1926" },
+            new Song { Title = "ZZZZZZZ", Lyrics = "Born in 1926" },
+            new Song { Title = "ZZZZZZZ", Lyrics = "Born in 1926" },
+            new Song { Title = "ZZZZZZZZ", Lyrics = "Born in 1926" }
+        });
+        context.SaveChanges();
     }
 }
+        }
+    }
