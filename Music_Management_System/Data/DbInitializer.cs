@@ -37,7 +37,7 @@ public static class DbInitializer
 
     private static void SeedData(AppDbContext context)
     {
-        private static void SeedData(AppDbContext context)
+        void SeedData(AppDbContext context)
 {
     if (!context.Composers.Any())
     {
