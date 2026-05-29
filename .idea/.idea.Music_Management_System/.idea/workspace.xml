@@ -15,17 +15,7 @@
     <configurations />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c68eb64f-76a7-4962-8df7-842505f39a63" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Music_Management_System/Helpers/CloudinarySettings.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Music_Management_System/Interfaces/IMP3Services.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Music_Management_System/Interfaces/IPhotoService.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Music_Management_System/Services/MP3Service.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Music_Management_System/Services/PhotoService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Music_Management_System/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Music_Management_System/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Music_Management_System/Models/Song.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Music_Management_System/Models/Song.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Music_Management_System/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Music_Management_System/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Music_Management_System/appsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/Music_Management_System/appsettings.json" afterDir="false" />
-    </list>
+    <list default="true" id="c68eb64f-76a7-4962-8df7-842505f39a63" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -215,7 +205,7 @@
       <option name="presentableId" value="Default" />
       <updated>1780054445530</updated>
       <workItem from="1780054455743" duration="2622000" />
-      <workItem from="1780057142439" duration="4519000" />
+      <workItem from="1780057142439" duration="4834000" />
     </task>
     <task id="LOCAL-00001" summary="First Commit">
       <option name="closed" value="true" />
@@ -289,7 +279,15 @@
       <option name="project" value="LOCAL" />
       <updated>1780060335474</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Adding Image/Audio Upload">
+      <option name="closed" value="true" />
+      <created>1780061719087</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1780061719087</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -307,7 +305,8 @@
     <MESSAGE value="Change in Layout/Seeding data" />
     <MESSAGE value="Change in Data&#10; Seeding policy" />
     <MESSAGE value="Change in Data Seeding policy" />
-    <option name="LAST_COMMIT_MESSAGE" value="Change in Data Seeding policy" />
+    <MESSAGE value="Adding Image/Audio Upload" />
+    <option name="LAST_COMMIT_MESSAGE" value="Adding Image/Audio Upload" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

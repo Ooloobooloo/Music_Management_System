@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Music_Management_System.Data;
+using Music_Management_System.Helpers;
+using Music_Management_System.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +11,9 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
 
+builder.Services.Configure<CloudinarySettings>(builder.Configuration.GetSection("CloudinarySettings"));
+builder.Services.AddScoped<IMP3Service, MP3Service>();
+builder.Services.AddScoped<IPhotoService, PhotoService>();
 
 
 
