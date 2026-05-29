@@ -5,10 +5,10 @@ using CloudinaryDotNet.Actions;
 using Microsoft.Extensions.Options;
 using Music_Management_System.Helpers;
 
-public class MP3Service : IMP3Service  {
+public class Mp3Service : IMP3Service  {
     private readonly Cloudinary _cloudinary;
 
-    public MP3Service(IOptions<CloudinarySettings> config) {
+    public Mp3Service(IOptions<CloudinarySettings> config) {
         var acc = new Account(config.Value.CloudName, config.Value.ApiKey, config.Value.ApiSecret);
         _cloudinary = new Cloudinary(acc);
     }

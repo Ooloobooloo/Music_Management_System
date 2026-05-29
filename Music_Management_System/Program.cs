@@ -12,7 +12,7 @@ builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
 
 builder.Services.Configure<CloudinarySettings>(builder.Configuration.GetSection("CloudinarySettings"));
-builder.Services.AddScoped<IMP3Service, MP3Service>();
+builder.Services.AddScoped<IMP3Service, Mp3Service>();
 builder.Services.AddScoped<IPhotoService, PhotoService>();
 
 
