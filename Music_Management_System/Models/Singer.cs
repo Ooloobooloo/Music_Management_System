@@ -1,3 +1,4 @@
+using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -18,6 +19,7 @@ public class Singer
    
    [NotMapped]
    public IFormFile ImageFile { get; set; }  = null;
-
+  
+   public virtual ICollection<Song> Songs { get; set; } = new Collection<Song>();
 
 }

@@ -16,11 +16,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c68eb64f-76a7-4962-8df7-842505f39a63" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Music_Management_System/Data/AppDbContext.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Music_Management_System/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Music_Management_System/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Music_Management_System/Controllers/HomeController.cs" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Music_Management_System/Models/Composer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Music_Management_System/Models/Composer.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Music_Management_System/Models/Singer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Music_Management_System/Models/Singer.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Music_Management_System/Models/Song.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Music_Management_System/Models/Song.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Music_Management_System/Music_Management_System.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Music_Management_System/Music_Management_System.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Music_Management_System/appsettings.json" beforeDir="false" afterPath="$PROJECT_DIR$/Music_Management_System/appsettings.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Music_Management_System/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Music_Management_System/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Music_Management_System/Views/Home/Index.cshtml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Music_Management_System/Views/Home/Privacy.cshtml" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,25 +54,31 @@
       <entry key="_D:/FptAptech/.Net_All_Star/Music_Management_System" value="3EOfGmBwIxeIJY61ipHLhJ6aAJW" />
     </persistenceIdMap>
   </component>
+  <component name="DpaMonitoringSettings">
+    <option name="firstShow" value="false" />
+  </component>
   <component name="EmbeddingIndexingInfo">
     <option name="cachedIndexableFilesCount" value="76" />
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "Ooloobooloo"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;Ooloobooloo&quot;
   }
-}]]></component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/Ooloobooloo/Music_Management_System.git",
-    "accountId": "971da565-4650-495e-9308-329487150eb3"
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/Ooloobooloo/Music_Management_System.git&quot;,
+    &quot;accountId&quot;: &quot;971da565-4650-495e-9308-329487150eb3&quot;
   }
-}]]></component>
+}</component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/Music_Management_System/Controllers/ComposerController.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Music_Management_System/Controllers/SingerController.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Music_Management_System/Data/AppDbContext.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Music_Management_System/Models/Composer.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Music_Management_System/Models/Singer.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Music_Management_System/Models/Song.cs" root0="FORCE_HIGHLIGHTING" />
@@ -78,40 +88,42 @@
     <urls />
   </component>
   <component name="MetaFilesCheckinStateConfiguration" checkMetaFiles="true" />
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 7,
-  "fromUser": false
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 7,
+  &quot;fromUser&quot;: false
+}</component>
   <component name="ProjectId" id="3EOfGmBwIxeIJY61ipHLhJ6aAJW" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.MCP Project settings loaded": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.cidr.known.project.marker": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "RunOnceActivity.readMode.enableVisualFormatting": "true",
-    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
-    "cidr.known.project.marker": "true",
-    "codeWithMe.voiceChat.enabledByDefault": "false",
-    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
-    "git-widget-placeholder": "master",
-    "junie.onboarding.icon.badge.shown": "true",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.lookFeel",
-    "to.speed.mode.migration.done": "true",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;.NET Launch Settings Profile.Music_Management_System: http.executor&quot;: &quot;Run&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.MCP Project settings loaded&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.readMode.enableVisualFormatting&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
+    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
+    &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;,
+    &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
-  <component name="RunManager" selected=".NET Launch Settings Profile.Music_Management_System: IIS Express">
+}</component>
+  <component name="RunManager" selected=".NET Launch Settings Profile.Music_Management_System: http">
     <configuration name="Music_Management_System: IIS Express" type="LaunchSettings" factoryName=".NET Launch Settings Profile">
       <option name="LAUNCH_PROFILE_PROJECT_FILE_PATH" value="$PROJECT_DIR$/Music_Management_System/Music_Management_System.csproj" />
       <option name="LAUNCH_PROFILE_TFM" value="net8.0" />
@@ -168,7 +180,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1780054445530</updated>
-      <workItem from="1780054455743" duration="1682000" />
+      <workItem from="1780054455743" duration="2622000" />
     </task>
     <task id="LOCAL-00001" summary="First Commit">
       <option name="closed" value="true" />
@@ -186,7 +198,15 @@
       <option name="project" value="LOCAL" />
       <updated>1780055002884</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Models Created">
+      <option name="closed" value="true" />
+      <created>1780056164661</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1780056164661</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -198,7 +218,8 @@
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
     <MESSAGE value="First Commit" />
     <MESSAGE value="2nd Commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="2nd Commit" />
+    <MESSAGE value="Models Created" />
+    <option name="LAST_COMMIT_MESSAGE" value="Models Created" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

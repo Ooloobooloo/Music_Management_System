@@ -1,3 +1,4 @@
+using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -19,7 +20,8 @@ public class Composer
     public string ImageUrl { get; set; } = string.Empty;
    
     [NotMapped]
-    public IFormFile ImageFile { get; set; }  = null;
+    public IFormFile? ImageFile { get; set; } = null;
 
+    public virtual ICollection<Song> Songs { get; set; } = new Collection<Song>();
 
 }
