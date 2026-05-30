@@ -1,77 +1,105 @@
 @model Music_Management_System.Models.Song
 
 @{
-    ViewData["Title"] = "Edit";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+ViewData["Title"] = "Edit Song";
+Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Edit</h1>
+<div class="page-hero" style="margin-bottom: 1.75rem;">
+    <div>
+        <h1>Edit Song</h1>
+        <p>Update the details for <strong>@Model.Title</strong></p>
+    </div>
+</div>
 
-<h4>Song</h4>
-<hr />
 <div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="col-md-9">
+        <form asp-action="Edit" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
             <input type="hidden" asp-for="Id" />
+
             <div class="form-group">
-                <label asp-for="Title" class="control-label"></label>
+                <label asp-for="Title" class="control-label">Song Title</label>
                 <input asp-for="Title" class="form-control" />
                 <span asp-validation-for="Title" class="text-danger"></span>
             </div>
+
             <div class="form-group">
-                <label asp-for="Lyrics" class="control-label"></label>
-                <input asp-for="Lyrics" class="form-control" />
+                <label asp-for="Lyrics" class="control-label">Lyrics</label>
+                <textarea asp-for="Lyrics" class="form-control" id="editor"></textarea>
                 <span asp-validation-for="Lyrics" class="text-danger"></span>
             </div>
+
             <div class="form-group">
-                <label asp-for="ThumbnailUrl" class="control-label"></label>
-                <input asp-for="ThumbnailUrl" class="form-control" />
-                <span asp-validation-for="ThumbnailUrl" class="text-danger"></span>
+                <label for="ThumbnailFile" class="control-label">Cover Artwork</label>
+                <input type="file" id="ThumbnailFile" name="ThumbnailFile"
+                       class="form-control" accept="image/*" />
+                @if (!string.IsNullOrEmpty(Model.ThumbnailUrl))
+                {
+                <small class="form-text">Current: <a href="@Model.ThumbnailUrl" target="_blank">view image</a> — upload a new file to replace it</small>
+                }
+                else
+                {
+                <small class="form-text">JPG, PNG, or WEBP (optional)</small>
+                }
             </div>
+
             <div class="form-group">
-                <label asp-for="MP3Url" class="control-label"></label>
-                <input asp-for="MP3Url" class="form-control" />
-                <span asp-validation-for="MP3Url" class="text-danger"></span>
+                <label for="MP3File" class="control-label">MP3 File</label>
+                <input type="file" id="MP3File" name="MP3File"
+                       class="form-control" accept="audio/mpeg,.mp3" />
+                @if (!string.IsNullOrEmpty(Model.MP3Url))
+                {
+                <small class="form-text">Current file exists — upload a new MP3 to replace it</small>
+                }
+                else
+                {
+                <small class="form-text">Upload an MP3 to enable in-browser playback (optional)</small>
+                }
             </div>
+
             <div class="form-group">
-                <label asp-for="ReleaseDate" class="control-label"></label>
-                <input asp-for="ReleaseDate" class="form-control" />
+                <label asp-for="ReleaseDate" class="control-label">Release Date</label>
+                <input asp-for="ReleaseDate" class="form-control" type="datetime-local" />
                 <span asp-validation-for="ReleaseDate" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="CreatedAt" class="control-label"></label>
-                <input asp-for="CreatedAt" class="form-control" />
-                <span asp-validation-for="CreatedAt" class="text-danger"></span>
+
+            <div class="row g-3">
+                <div class="col-sm-6 form-group">
+                    <label asp-for="SingerId" class="control-label">Singer</label>
+                    <select asp-for="SingerId" class="form-control" asp-items="ViewBag.SingerId"></select>
+                    <span asp-validation-for="SingerId" class="text-danger"></span>
+                </div>
+                <div class="col-sm-6 form-group">
+                    <label asp-for="ComposerId" class="control-label">Composer</label>
+                    <select asp-for="ComposerId" class="form-control" asp-items="ViewBag.ComposerId"></select>
+                    <span asp-validation-for="ComposerId" class="text-danger"></span>
+                </div>
             </div>
+
             <div class="form-group">
-                <label asp-for="UpdatedAt" class="control-label"></label>
-                <input asp-for="UpdatedAt" class="form-control" />
-                <span asp-validation-for="UpdatedAt" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="SingerId" class="control-label"></label>
-                <select asp-for="SingerId" class="form-control" asp-items="ViewBag.SingerId"></select>
-                <span asp-validation-for="SingerId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ComposerId" class="control-label"></label>
-                <select asp-for="ComposerId" class="form-control" asp-items="ViewBag.ComposerId"></select>
-                <span asp-validation-for="ComposerId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Status" class="control-label"></label>
-                <input asp-for="Status" class="form-control" />
+                <label asp-for="Status" class="control-label">Status</label>
+                <input asp-for="Status" class="form-control" placeholder="e.g. Published, Draft" />
                 <span asp-validation-for="Status" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+
+            <div class="form-group mt-4 d-flex gap-3 align-items-center">
+                <input type="submit" value="Save Changes" class="btn btn-primary px-4" />
+                <a asp-action="Details" asp-route-id="@Model.Id" class="back-link">← Back to Details</a>
             </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
+@section Scripts {
+<script src="https://cdn.ckeditor.com/ckeditor5/41.0.0/classic/ckeditor.js"></script>
+<script>
+    ClassicEditor
+        .create(document.querySelector('#editor'), {
+            toolbar: ['heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', 'blockQuote', 'insertTable', 'undo', 'redo']
+        })
+        .then(editor => console.log('CKEditor initialized', editor))
+        .catch(error => console.error(error));
+</script>
+<partial name="_ValidationScriptsPartial" />
+}

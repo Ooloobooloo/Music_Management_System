@@ -1,9 +1,79 @@
 @model Music_Management_System.Models.Song
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Add a New Song";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
+<div class="page-hero" style="margin-bottom: 1.75rem;">
+    <div>
+        <h1>Add a New Song</h1>
+        <p>Fill in the details below to publish a track</p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-9">
+        <form asp-action="Create" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+            <div class="form-group">
+                <label asp-for="Title" class="control-label">Song Title</label>
+                <input asp-for="Title" class="form-control" placeholder="e.g. Autumn Leaves" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Lyrics" class="control-label">Lyrics</label>
+                <textarea asp-for="Lyrics" class="form-control" id="editor"
+                          placeholder="Paste or write the lyrics here…"></textarea>
+                <span asp-validation-for="Lyrics" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="ThumbnailFile" class="control-label">Cover Artwork</label>
+                <input type="file" id="ThumbnailFile" name="ThumbnailFile"
+                       class="form-control" accept="image/*" />
+                <small class="form-text">JPG, PNG, or WEBP — shown as the song thumbnail (optional)</small>
+            </div>
+
+            <div class="form-group">
+                <label for="MP3File" class="control-label">MP3 File</label>
+                <input type="file" id="MP3File" name="MP3File"
+                       class="form-control" accept="audio/mpeg,.mp3" />
+                <small class="form-text">Upload an MP3 to enable in-browser playback (optional)</small>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="ReleaseDate" class="control-label">Release Date</label>
+                <input asp-for="ReleaseDate" class="form-control" type="datetime-local" />
+                <span asp-validation-for="ReleaseDate" class="text-danger"></span>
+            </div>
+
+            <div class="row g-3">
+                <div class="col-sm-6 form-group">
+                    <label asp-for="SingerId" class="control-label">Singer</label>
+                    <select asp-for="SingerId" class="form-control" asp-items="ViewBag.SingerId"></select>
+                </div>
+                <div class="col-sm-6 form-group">
+                    <label asp-for="ComposerId" class="control-label">Composer</label>
+                    <select asp-for="ComposerId" class="form-control" asp-items="ViewBag.ComposerId"></select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Status" class="control-label">Status</label>
+                <input asp-for="Status" class="form-control" placeholder="e.g. Published, Draft" />
+                <span asp-validation-for="Status" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mt-4 d-flex gap-3 align-items-center">
+                <input type="submit" value="Publish Song" class="btn btn-primary px-4" />
+                <a asp-action="Index" class="back-link">← Back to Library</a>
+            </div>
+        </form>
+    </div>
+</div>
 
 @section Scripts {
     <script src="https://cdn.ckeditor.com/ckeditor5/41.0.0/classic/ckeditor.js"></script>
@@ -12,76 +82,8 @@
             .create(document.querySelector('#editor'), {
                 toolbar: ['heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', 'blockQuote', 'insertTable', 'undo', 'redo']
             })
-            .then(editor => {
-                console.log('Editor was initialized', editor);
-            })
-            .catch(error => {
-                console.error(error);
-            });
+            .then(editor => console.log('CKEditor initialized', editor))
+            .catch(error => console.error(error));
     </script>
-    <style>
-        .ck-editor__editable {
-            min-height: 200px;
-            min-width: 100%; 
-            max-width: 100%;
-        }
-    </style>
     <partial name="_ValidationScriptsPartial" />
 }
-
-<h1>Create</h1>
-
-<h4>Song</h4>
-<hr />
-<div class="row">
-    <div class="col-md-9">
-        <form asp-action="Create" enctype="multipart/form-data">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Title" class="control-label"></label>
-                <input asp-for="Title" class="form-control" />
-                <span asp-validation-for="Title" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Lyrics" class="control-label"></label>
-                <textarea asp-for="Lyrics" class="form-control" id="editor"></textarea>
-                <span asp-validation-for="Lyrics" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label for="thumbnailFile" class="control-label">Thumbnail (Image)</label>
-                <input type="file" id="thumbnailFile" name="thumbnailFile" class="form-control" accept="image/*" />
-                <small class="form-text text-muted">Select an image file to upload (optional)</small>
-            </div>
-            <div class="form-group">
-                <label for="mp3File" class="control-label">MP3 File</label>
-                <input type="file" id="mp3File" name="mp3File" class="form-control" accept="audio/mpeg,.mp3" />
-                <small class="form-text text-muted">Select an MP3 file to upload (optional)</small>
-            </div>
-            <div class="form-group">
-                <label asp-for="ReleaseDate" class="control-label"></label>
-                <input asp-for="ReleaseDate" class="form-control" type="datetime-local" />
-                <span asp-validation-for="ReleaseDate" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="SingerId" class="control-label"></label>
-                <select asp-for="SingerId" class="form-control" asp-items="ViewBag.SingerId"></select>
-            </div>
-            <div class="form-group">
-                <label asp-for="ComposerId" class="control-label"></label>
-                <select asp-for="ComposerId" class="form-control" asp-items="ViewBag.ComposerId"></select>
-            </div>
-            <div class="form-group">
-                <label asp-for="Status" class="control-label"></label>
-                <input asp-for="Status" class="form-control" />
-                <span asp-validation-for="Status" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>

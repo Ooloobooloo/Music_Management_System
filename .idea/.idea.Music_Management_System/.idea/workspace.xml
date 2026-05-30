@@ -16,19 +16,28 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c68eb64f-76a7-4962-8df7-842505f39a63" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Music_Management_System/Services/Mp3Service.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Music_Management_System/Services/PhotoService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Music_Management_System/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Music_Management_System/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Music_Management_System/Controllers/ComposerController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Music_Management_System/Controllers/ComposerController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Music_Management_System/Controllers/SingerController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Music_Management_System/Controllers/SingerController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Music_Management_System/Controllers/SongController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Music_Management_System/Controllers/SongController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Music_Management_System/Interfaces/IMP3Services.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Music_Management_System/Interfaces/IMp3Services.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Music_Management_System/Interfaces/IPhotoService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Music_Management_System/Interfaces/IPhotoService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Music_Management_System/Music_Management_System.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Music_Management_System/Music_Management_System.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Music_Management_System/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Music_Management_System/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Music_Management_System/Migrations/20260529125027_InitialCreate.Designer.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Music_Management_System/Migrations/20260529125027_InitialCreate.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Music_Management_System/Migrations/AppDbContextModelSnapshot.cs" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Music_Management_System/Models/Song.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Music_Management_System/Models/Song.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Music_Management_System/Views/Composer/Create.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/Music_Management_System/Views/Composer/Create.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Music_Management_System/Views/Composer/Delete.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/Music_Management_System/Views/Composer/Delete.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Music_Management_System/Views/Composer/Details.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/Music_Management_System/Views/Composer/Details.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Music_Management_System/Views/Composer/Edit.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/Music_Management_System/Views/Composer/Edit.cshtml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Music_Management_System/Views/Composer/Index.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/Music_Management_System/Views/Composer/Index.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Music_Management_System/Views/Shared/_Layout.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/Music_Management_System/Views/Shared/_Layout.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Music_Management_System/Views/Singer/Create.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/Music_Management_System/Views/Singer/Create.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Music_Management_System/Views/Singer/Delete.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/Music_Management_System/Views/Singer/Delete.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Music_Management_System/Views/Singer/Details.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/Music_Management_System/Views/Singer/Details.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Music_Management_System/Views/Singer/Edit.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/Music_Management_System/Views/Singer/Edit.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Music_Management_System/Views/Singer/Index.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/Music_Management_System/Views/Singer/Index.cshtml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Music_Management_System/Views/Song/Create.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/Music_Management_System/Views/Song/Create.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Music_Management_System/Views/Song/Delete.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/Music_Management_System/Views/Song/Delete.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Music_Management_System/Views/Song/Details.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/Music_Management_System/Views/Song/Details.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Music_Management_System/Views/Song/Edit.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/Music_Management_System/Views/Song/Edit.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Music_Management_System/Views/Song/Index.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/Music_Management_System/Views/Song/Index.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Music_Management_System/wwwroot/css/site.css" beforeDir="false" afterPath="$PROJECT_DIR$/Music_Management_System/wwwroot/css/site.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,7 +55,7 @@
             <option name="modeId" value="Ask" />
             <option name="modelType" value="builtin_family" />
             <option name="modelValue" value="auto" />
-            <option name="status" value="Completed" />
+            <option name="status" value="Stopped" />
             <option name="targetType" value="LOCAL" />
           </session>
           <session>
@@ -165,7 +174,7 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "settings.editor.selected.configurable": "world.diligiteiustitiam.intellego.settings",
     "to.speed.mode.migration.done": "true",
     "vue.rearranger.settings.migration": "true"
   }
@@ -229,7 +238,7 @@
       <updated>1780054445530</updated>
       <workItem from="1780054455743" duration="2622000" />
       <workItem from="1780057142439" duration="5466000" />
-      <workItem from="1780112194567" duration="2262000" />
+      <workItem from="1780112194567" duration="7749000" />
     </task>
     <task id="LOCAL-00001" summary="First Commit">
       <option name="closed" value="true" />
@@ -335,7 +344,15 @@
       <option name="project" value="LOCAL" />
       <updated>1780062630556</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="Sanitizing Html">
+      <option name="closed" value="true" />
+      <created>1780114482321</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1780114482321</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -357,7 +374,8 @@
     <MESSAGE value="Change in Uploading Procedure" />
     <MESSAGE value="Service Update" />
     <MESSAGE value="Re-calibrate Uploading services" />
-    <option name="LAST_COMMIT_MESSAGE" value="Re-calibrate Uploading services" />
+    <MESSAGE value="Sanitizing Html" />
+    <option name="LAST_COMMIT_MESSAGE" value="Sanitizing Html" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

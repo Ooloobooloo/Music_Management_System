@@ -64,7 +64,7 @@ namespace Music_Management_System.Controllers
         // POST: Song/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Title,Lyrics,ThumbnailFile,MP3File,ReleaseDate,CreatedAt,UpdatedAt,SingerId,ComposerId,Status")] Song song)
+        public async Task<IActionResult> Create([Bind("Id,Title,Lyrics,ThumbnailFile,MP3File,ReleaseDate,SingerId,ComposerId,Status")] Song song)
         {
             if (ModelState.IsValid)
             {
@@ -145,7 +145,9 @@ namespace Music_Management_System.Controllers
             {
                 return NotFound();
             }
-
+            foreach (var kvp in ModelState)
+            foreach (var err in kvp.Value.Errors)
+                Console.WriteLine($"❌ {kvp.Key}: {err.ErrorMessage}");
             if (ModelState.IsValid)
             {
                 try

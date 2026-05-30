@@ -1,79 +1,82 @@
 @model Music_Management_System.Models.Song
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Song Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Details</h1>
-
-<div>
-    <h4>Song</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Title)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Title)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Lyrics)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Lyrics)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ThumbnailUrl)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ThumbnailUrl)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.MP3Url)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.MP3Url)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ReleaseDate)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ReleaseDate)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.CreatedAt)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.CreatedAt)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.UpdatedAt)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.UpdatedAt)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Singer)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Singer.Biography)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Composer)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Composer.Biography)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Status)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Status)
-        </dd>
-    </dl>
+<div class="page-hero" style="margin-bottom: 1.75rem;">
+    <div>
+        <h1>@Model.Title</h1>
+        <p>Released @Model.ReleaseDate.ToString("MMMM dd, yyyy")</p>
+    </div>
+    <div class="d-flex gap-2">
+        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">Edit</a>
+        <a asp-action="Index" class="btn btn-primary">← Library</a>
+    </div>
 </div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+
+<div class="row g-4">
+    {{!-- Left: artwork + audio --}}
+    <div class="col-md-4">
+        <div class="card p-0 overflow-hidden">
+            @if (!string.IsNullOrEmpty(Model.ThumbnailUrl))
+            {
+                <img src="@Model.ThumbnailUrl" alt="@Model.Title"
+                     class="img-fluid w-100" style="object-fit: cover; max-height: 260px;">
+            }
+            else
+            {
+                <div class="d-flex align-items-center justify-content-center"
+                     style="height: 200px; background: #e8d8c4; font-size: 4rem; opacity: .5;">
+                    🎵
+                </div>
+            }
+            @if (!string.IsNullOrEmpty(Model.MP3Url))
+            {
+                <div class="p-3">
+                    <audio controls class="w-100">
+                        <source src="@Model.MP3Url" type="audio/mpeg">
+                        Your browser does not support the audio element.
+                    </audio>
+                </div>
+            }
+        </div>
+    </div>
+
+    {{!-- Right: metadata --}}
+    <div class="col-md-8">
+        <div class="card p-4">
+            <h5 class="card-title mb-3">Song Info</h5>
+            <dl class="row mb-0">
+                <dt class="col-sm-4 control-label">Singer</dt>
+                <dd class="col-sm-8 card-text">@Model.Singer?.Name</dd>
+
+                <dt class="col-sm-4 control-label">Composer</dt>
+                <dd class="col-sm-8 card-text">@Model.Composer?.Name</dd>
+
+                <dt class="col-sm-4 control-label">Status</dt>
+                <dd class="col-sm-8 card-text">@Model.Status</dd>
+
+                <dt class="col-sm-4 control-label">Released</dt>
+                <dd class="col-sm-8 card-text">@Model.ReleaseDate.ToString("MMM dd, yyyy HH:mm")</dd>
+
+                <dt class="col-sm-4 control-label">Created</dt>
+                <dd class="col-sm-8 card-text">@Model.CreatedAt.ToString("MMM dd, yyyy")</dd>
+
+                <dt class="col-sm-4 control-label">Last Updated</dt>
+                <dd class="col-sm-8 card-text">@Model.UpdatedAt.ToString("MMM dd, yyyy")</dd>
+            </dl>
+        </div>
+
+        @if (!string.IsNullOrEmpty(Model.Lyrics))
+        {
+            <div class="card p-4 mt-3">
+                <h5 class="card-title mb-3">Lyrics</h5>
+                <div class="card-text" style="line-height: 1.8; white-space: pre-wrap;">
+                    @Html.Raw(Model.Lyrics)
+                </div>
+            </div>
+        }
+    </div>
 </div>

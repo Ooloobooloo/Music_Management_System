@@ -5,86 +5,66 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Index</h1>
+<div class="page-hero">
+    <div>
+        <h1>Song Library</h1>
+        <p>Browse, listen, and manage your music collection</p>
+    </div>
+    <a asp-action="Create" class="btn btn-primary">+ Add New Song</a>
+</div>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Title)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Lyrics)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ThumbnailUrl)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.MP3Url)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ReleaseDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CreatedAt)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.UpdatedAt)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Singer)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Composer)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Status)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
+<div class="row g-4">
 @foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Title)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Lyrics)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ThumbnailUrl)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.MP3Url)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ReleaseDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CreatedAt)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UpdatedAt)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Singer.Biography)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Composer.Biography)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Status)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
+    <div class="col-md-6">
+        <div class="card h-100">
+            <div class="row g-0">
+                <div class="col-4">
+                    @if (!string.IsNullOrEmpty(item.ThumbnailUrl))
+                    {
+                        <img src="@item.ThumbnailUrl"
+                             class="img-fluid h-100 rounded-start"
+                             alt="@item.Title"
+                             style="object-fit: cover; min-height: 160px;">
+                    }
+                    else
+                    {
+                        <div class="bg-secondary d-flex align-items-center justify-content-center h-100"
+                             style="min-height: 160px; border-radius: 14px 0 0 14px;">
+                            <span style="font-size: 2rem; opacity: 0.5;">🎵</span>
+                        </div>
+                    }
+                </div>
+                <div class="col-8">
+                    <div class="card-body d-flex flex-column h-100 py-3">
+                        <h5 class="card-title">@item.Title</h5>
+
+                        <p class="card-text">
+                            <strong>Singer:</strong> @item.Singer?.Name
+                        </p>
+                        <p class="card-text">
+                            <strong>Composer:</strong> @item.Composer?.Name
+                        </p>
+                        <p class="card-text">
+                            <strong>Released:</strong> @item.ReleaseDate.ToString("MMM dd, yyyy")
+                        </p>
+
+                        @if (!string.IsNullOrEmpty(item.MP3Url))
+                        {
+                            <audio controls class="mt-auto mb-2">
+                                <source src="@item.MP3Url" type="audio/mpeg">
+                                Your browser does not support the audio element.
+                            </audio>
+                        }
+
+                        <div class="btn-group mt-2" role="group">
+                            <a asp-action="Edit"    asp-route-id="@item.Id" class="btn btn-sm btn-warning">Edit</a>
+                            <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-sm btn-info">Details</a>
+                            <a asp-action="Delete"  asp-route-id="@item.Id" class="btn btn-sm btn-danger">Delete</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 }
-    </tbody>
-</table>
+</div>

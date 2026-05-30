@@ -1,22 +1,350 @@
+/* ============================================================
+   Tune In — Warm Music Platform Theme
+   Drop this into wwwroot/css/site.css (replaces default)
+   Uses Bootstrap 5 + Google Fonts (loaded in _Layout.cshtml)
+   ============================================================ */
+
+/* ── Fonts ─────────────────────────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500&display=swap');
+
+/* ── Palette variables ──────────────────────────────────────── */
+:root {
+  --cream:       #FDF6EC;
+  --warm-white:  #FFF9F2;
+  --amber-light: #FAC775;
+  --amber:       #E8971D;
+  --amber-deep:  #BA7517;
+  --terracotta:  #C9613A;
+  --terra-light: #F0997B;
+  --brown-soft:  #6B4226;
+  --brown-muted: #8C6246;
+  --ink:         #2C1A0E;
+  --ink-muted:   #5C3D22;
+  --border:      rgba(186, 117, 23, 0.18);
+  --shadow-warm: 0 2px 16px rgba(186, 117, 23, 0.10);
+}
+
+/* ── Base ───────────────────────────────────────────────────── */
 html {
-  font-size: 14px;
-}
-
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
-}
-
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
-}
-
-html {
-  position: relative;
-  min-height: 100%;
+  height: 100%;
 }
 
 body {
-  margin-bottom: 60px;
+  background-color: var(--cream);
+  color: var(--ink);
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 400;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.main-content {
+  flex: 1;
+}
+
+h1, h2, h3, h4, h5, h6,
+.navbar-brand {
+  font-family: 'Playfair Display', serif;
+  color: var(--ink);
+}
+
+a {
+  color: var(--terracotta);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+a:hover {
+  color: var(--amber-deep);
+}
+
+/* ── Navbar ─────────────────────────────────────────────────── */
+.navbar {
+  background-color: var(--warm-white) !important;
+  border-bottom: 1px solid var(--border) !important;
+  box-shadow: var(--shadow-warm);
+  padding: 0.75rem 1.5rem;
+}
+
+.navbar-brand {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--ink) !important;
+  letter-spacing: -0.01em;
+}
+.navbar-brand::before {
+  content: "🎵 ";
+}
+
+.nav-link {
+  color: var(--ink-muted) !important;
+  font-weight: 500;
+  font-size: 0.9rem;
+  letter-spacing: 0.03em;
+  padding: 0.5rem 1rem !important;
+  border-radius: 6px;
+  transition: background 0.2s, color 0.2s;
+}
+.nav-link:hover,
+.nav-link.active {
+  color: var(--terracotta) !important;
+  background-color: rgba(201, 97, 58, 0.08);
+}
+
+/* ── Page headings ──────────────────────────────────────────── */
+h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 0.25rem;
+  letter-spacing: -0.02em;
+}
+h4 {
+  font-weight: 600;
+  color: var(--brown-muted);
+  font-size: 1rem;
+}
+hr {
+  border-color: var(--border);
+  opacity: 1;
+  margin-bottom: 1.5rem;
+}
+
+/* ── Buttons ─────────────────────────────────────────────────── */
+.btn-primary {
+  background-color: var(--terracotta);
+  border-color: var(--terracotta);
+  color: #fff;
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 500;
+  border-radius: 8px;
+  padding: 0.45rem 1.1rem;
+  transition: background 0.2s, transform 0.15s;
+}
+.btn-primary:hover,
+.btn-primary:focus {
+  background-color: var(--amber-deep);
+  border-color: var(--amber-deep);
+  color: #fff;
+  transform: translateY(-1px);
+}
+
+.btn-warning {
+  background-color: var(--amber);
+  border-color: var(--amber);
+  color: var(--ink);
+  font-weight: 500;
+  border-radius: 8px;
+}
+.btn-warning:hover {
+  background-color: var(--amber-deep);
+  border-color: var(--amber-deep);
+  color: #fff;
+}
+
+.btn-info {
+  background-color: #d4b896;
+  border-color: #d4b896;
+  color: var(--ink);
+  font-weight: 500;
+  border-radius: 8px;
+}
+.btn-info:hover {
+  background-color: var(--brown-muted);
+  border-color: var(--brown-muted);
+  color: #fff;
+}
+
+.btn-danger {
+  background-color: #c9613a;
+  border-color: #c9613a;
+  color: #fff;
+  font-weight: 500;
+  border-radius: 8px;
+}
+.btn-danger:hover {
+  background-color: #a34326;
+  border-color: #a34326;
+}
+
+/* ── Cards (song list) ──────────────────────────────────────── */
+.card {
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: var(--warm-white);
+  box-shadow: var(--shadow-warm);
+  overflow: hidden;
+  transition: box-shadow 0.25s, transform 0.2s;
+}
+.card:hover {
+  box-shadow: 0 6px 28px rgba(186, 117, 23, 0.18);
+  transform: translateY(-2px);
+}
+
+.card-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 0.35rem;
+}
+.card-text {
+  color: var(--ink-muted);
+  font-size: 0.82rem;
+  line-height: 1.5;
+  margin-bottom: 0.2rem;
+}
+.card-text strong {
+  color: var(--brown-soft);
+  font-weight: 500;
+}
+
+/* No-image placeholder */
+.card .bg-secondary {
+  background-color: #e8d8c4 !important;
+}
+.card .bg-secondary span {
+  color: var(--brown-muted) !important;
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+}
+
+/* ── Audio player ───────────────────────────────────────────── */
+audio {
+  border-radius: 8px;
+  background: var(--cream);
+  width: 100%;
+  margin-top: 8px;
+  accent-color: var(--terracotta);
+}
+
+/* ── Form elements ──────────────────────────────────────────── */
+.form-control,
+.form-select {
+  background-color: var(--warm-white);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--ink);
+  font-family: 'DM Sans', sans-serif;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.form-control:focus,
+.form-select:focus {
+  border-color: var(--amber);
+  box-shadow: 0 0 0 3px rgba(232, 151, 29, 0.15);
+  background-color: var(--warm-white);
+  color: var(--ink);
+}
+
+.control-label,
+label.control-label {
+  font-weight: 500;
+  color: var(--brown-soft);
+  font-size: 0.88rem;
+  margin-bottom: 0.3rem;
+  display: block;
+}
+
+.form-text {
+  color: var(--brown-muted) !important;
+  font-size: 0.78rem;
+}
+
+.form-group {
+  margin-bottom: 1.1rem;
+}
+
+/* ── Validation ─────────────────────────────────────────────── */
+.text-danger {
+  color: var(--terracotta) !important;
+  font-size: 0.8rem;
+}
+
+/* ── CKEditor integration ───────────────────────────────────── */
+.ck.ck-editor__main > .ck-editor__editable {
+  background: var(--warm-white) !important;
+  border-color: var(--border) !important;
+  border-radius: 0 0 8px 8px !important;
+  color: var(--ink);
+  font-family: 'DM Sans', sans-serif;
+  min-height: 200px;
+}
+.ck.ck-toolbar {
+  background: #f3e8d8 !important;
+  border-color: var(--border) !important;
+  border-radius: 8px 8px 0 0 !important;
+}
+
+/* ── Footer ─────────────────────────────────────────────────── */
+.footer {
+  width: 100%;
+  border-top: 1px solid var(--border) !important;
+  background: var(--warm-white);
+  padding: 1rem 0;
+  color: var(--brown-muted);
+  font-size: 0.82rem;
+  line-height: 2.5;
+}
+.footer a {
+  color: var(--terracotta);
+}
+
+/* ── Back to list link ──────────────────────────────────────── */
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  color: var(--brown-muted);
+  font-size: 0.875rem;
+  font-weight: 500;
+  margin-top: 1.25rem;
+  transition: color 0.2s;
+}
+.back-link:hover {
+  color: var(--terracotta);
+}
+
+/* ── Page hero strip (index) ────────────────────────────────── */
+.page-hero {
+  background: linear-gradient(135deg, #fdf0df 0%, #fae3c3 100%);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 1.5rem 2rem;
+  margin-bottom: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+.page-hero h1 {
+  margin: 0;
+  font-size: 1.75rem;
+}
+.page-hero p {
+  margin: 0.25rem 0 0;
+  color: var(--brown-muted);
+  font-size: 0.88rem;
+}
+
+/* ── Utility ─────────────────────────────────────────────────── */
+.border-top  { border-top:    1px solid var(--border) !important; }
+.border-bottom { border-bottom: 1px solid var(--border) !important; }
+.box-shadow  { box-shadow: var(--shadow-warm); }
+
+/* nav-pills (if used elsewhere) */
+.nav-pills .nav-link.active,
+.nav-pills .show > .nav-link {
+  background-color: var(--terracotta);
+  border-color: var(--terracotta);
+  color: #fff;
+}
+
+/* ── Responsive tweaks ──────────────────────────────────────── */
+@media (max-width: 576px) {
+  .page-hero {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1rem 1.25rem;
+  }
 }
