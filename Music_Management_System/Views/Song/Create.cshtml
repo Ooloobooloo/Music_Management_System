@@ -1,13 +1,15 @@
 @model Music_Management_System.Models.Song
 
-@section Scripts {
-    <!-- Nhúng thư viện CKEditor 5 từ CDN -->
-    <script src="https://cdn.ckeditor.com/ckeditor5/41.0.0/classic/ckeditor.js"></script>
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
 
+@section Scripts {
+    <script src="https://cdn.ckeditor.com/ckeditor5/41.0.0/classic/ckeditor.js"></script>
     <script>
         ClassicEditor
             .create(document.querySelector('#editor'), {
-                // Cấu hình các công cụ hiển thị trên thanh toolbar (tùy chọn)
                 toolbar: ['heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', 'blockQuote', 'insertTable', 'undo', 'redo']
             })
             .then(editor => {
@@ -18,23 +20,13 @@
             });
     </script>
     <style>
-        /* Tùy chỉnh kích thước của CKEditor */
         .ck-editor__editable {
-            min-height: 200px; /* Điều chỉnh chiều cao tối thiểu */
-            min-width: 100%; max-width: 100%;
+            min-height: 200px;
+            min-width: 100%; 
+            max-width: 100%;
         }
     </style>
-    <!-- Đừng quên nhúng script validation mặc định của .NET -->
     <partial name="_ValidationScriptsPartial" />
-}
-
-
-
-
-
-@{
-    ViewData["Title"] = "Create";
-    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h1>Create</h1>
@@ -43,7 +35,7 @@
 <hr />
 <div class="row">
     <div class="col-md-9">
-        <form asp-action="Create">
+        <form asp-action="Create" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Title" class="control-label"></label>
@@ -56,37 +48,27 @@
                 <span asp-validation-for="Lyrics" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="ThumbnailUrl" class="control-label"></label>
-                <input asp-for="ThumbnailUrl" class="form-control" />
-                <span asp-validation-for="ThumbnailUrl" class="text-danger"></span>
+                <label for="thumbnailFile" class="control-label">Thumbnail (Image)</label>
+                <input type="file" id="thumbnailFile" name="thumbnailFile" class="form-control" accept="image/*" />
+                <small class="form-text text-muted">Select an image file to upload (optional)</small>
             </div>
             <div class="form-group">
-                <label asp-for="MP3Url" class="control-label"></label>
-                <input asp-for="MP3Url" class="form-control" />
-                <span asp-validation-for="MP3Url" class="text-danger"></span>
+                <label for="mp3File" class="control-label">MP3 File</label>
+                <input type="file" id="mp3File" name="mp3File" class="form-control" accept="audio/mpeg,.mp3" />
+                <small class="form-text text-muted">Select an MP3 file to upload (optional)</small>
             </div>
             <div class="form-group">
                 <label asp-for="ReleaseDate" class="control-label"></label>
-                <input asp-for="ReleaseDate" class="form-control" />
+                <input asp-for="ReleaseDate" class="form-control" type="datetime-local" />
                 <span asp-validation-for="ReleaseDate" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="CreatedAt" class="control-label"></label>
-                <input asp-for="CreatedAt" class="form-control" />
-                <span asp-validation-for="CreatedAt" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="UpdatedAt" class="control-label"></label>
-                <input asp-for="UpdatedAt" class="form-control" />
-                <span asp-validation-for="UpdatedAt" class="text-danger"></span>
-            </div>
-            <div class="form-group">
                 <label asp-for="SingerId" class="control-label"></label>
-                <select asp-for="SingerId" class ="form-control" asp-items="ViewBag.SingerId"></select>
+                <select asp-for="SingerId" class="form-control" asp-items="ViewBag.SingerId"></select>
             </div>
             <div class="form-group">
                 <label asp-for="ComposerId" class="control-label"></label>
-                <select asp-for="ComposerId" class ="form-control" asp-items="ViewBag.ComposerId"></select>
+                <select asp-for="ComposerId" class="form-control" asp-items="ViewBag.ComposerId"></select>
             </div>
             <div class="form-group">
                 <label asp-for="Status" class="control-label"></label>
@@ -103,4 +85,3 @@
 <div>
     <a asp-action="Index">Back to List</a>
 </div>
-

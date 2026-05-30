@@ -8,6 +8,7 @@
 
     <ItemGroup>
       <PackageReference Include="CloudinaryDotNet" Version="1.29.1" />
+      <PackageReference Include="HtmlSanitizer" Version="9.1.923-beta" />
       <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.16" />
       <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.16">
         <PrivateAssets>all</PrivateAssets>
@@ -30,7 +31,6 @@
 
     <ItemGroup>
       <Folder Include="Controllers\" />
-      <Folder Include="Services\" />
     </ItemGroup>
 
 </Project>

@@ -2,21 +2,28 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Ganss.Xss;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Music_Management_System.Data;
 using Music_Management_System.Models;
+using Music_Management_System.Interfaces;
 
 namespace Music_Management_System.Controllers
 {
     public class SongController : Controller
     {
         private readonly AppDbContext _context;
+        private readonly IPhotoService _photoService;
+        private readonly IMp3Service _mp3Service;
+        private static readonly HtmlSanitizer Sanitizer = new HtmlSanitizer();
 
-        public SongController(AppDbContext context)
+        public SongController(AppDbContext context, IPhotoService photoService, IMp3Service mp3Service)
         {
             _context = context;
+            _photoService = photoService;
+            _mp3Service = mp3Service;
         }
 
         // GET: Song
@@ -49,26 +56,65 @@ namespace Music_Management_System.Controllers
         // GET: Song/Create
         public IActionResult Create()
         {
-            ViewData["ComposerId"] = new SelectList(_context.Composers, "Id", "Biography");
-            ViewData["SingerId"] = new SelectList(_context.Singers, "Id", "Biography");
+            ViewData["ComposerId"] = new SelectList(_context.Composers, "Id", "Name");
+            ViewData["SingerId"] = new SelectList(_context.Singers, "Id", "Name");
             return View();
         }
 
         // POST: Song/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Title,Lyrics,ThumbnailUrl,MP3Url,ReleaseDate,CreatedAt,UpdatedAt,SingerId,ComposerId,Status")] Song song)
+        public async Task<IActionResult> Create([Bind("Id,Title,Lyrics,ThumbnailFile,MP3File,ReleaseDate,CreatedAt,UpdatedAt,SingerId,ComposerId,Status")] Song song)
         {
             if (ModelState.IsValid)
             {
+                // Sanitize Lyrics
+                song.Lyrics = Sanitizer.Sanitize(song.Lyrics);
+
+                // Handle thumbnail upload
+                if (song.ThumbnailFile != null && song.ThumbnailFile.Length > 0)
+                {
+                    try
+                    {
+                        var photoResult = await _photoService.AddPhotoAsync(song.ThumbnailFile);
+                        song.ThumbnailUrl = photoResult.SecureUrl?.ToString() ?? photoResult.Url?.ToString() ?? string.Empty;
+                    }
+                    catch (Exception ex)
+                    {
+                        ModelState.AddModelError("ThumbnailFile", $"Thumbnail upload failed: {ex.Message}");
+                        ViewData["ComposerId"] = new SelectList(_context.Composers, "Id", "Name", song.ComposerId);
+                        ViewData["SingerId"] = new SelectList(_context.Singers, "Id", "Name", song.SingerId);
+                        return View(song);
+                    }
+                }
+
+                // Handle MP3 upload
+                if (song.MP3File != null && song.MP3File.Length > 0)
+                {
+                    try
+                    {
+                        var audioResult = await _mp3Service.AddAudioAsync(song.MP3File);
+                        song.MP3Url = audioResult.SecureUrl?.ToString() ?? audioResult.Url?.ToString() ?? string.Empty;
+                    }
+                    catch (Exception ex)
+                    {
+                        ModelState.AddModelError("MP3File", $"Audio upload failed: {ex.Message}");
+                        ViewData["ComposerId"] = new SelectList(_context.Composers, "Id", "Name", song.ComposerId);
+                        ViewData["SingerId"] = new SelectList(_context.Singers, "Id", "Name", song.SingerId);
+                        return View(song);
+                    }
+                }
+
+                song.CreatedAt = DateTime.Now;
+                song.UpdatedAt = DateTime.Now;
+
                 _context.Add(song);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ComposerId"] = new SelectList(_context.Composers, "Id", "Biography", song.ComposerId);
-            ViewData["SingerId"] = new SelectList(_context.Singers, "Id", "Biography", song.SingerId);
+
+            ViewData["ComposerId"] = new SelectList(_context.Composers, "Id", "Name", song.ComposerId);
+            ViewData["SingerId"] = new SelectList(_context.Singers, "Id", "Name", song.SingerId);
             return View(song);
         }
 
@@ -85,17 +131,15 @@ namespace Music_Management_System.Controllers
             {
                 return NotFound();
             }
-            ViewData["ComposerId"] = new SelectList(_context.Composers, "Id", "Biography", song.ComposerId);
-            ViewData["SingerId"] = new SelectList(_context.Singers, "Id", "Biography", song.SingerId);
+            ViewData["ComposerId"] = new SelectList(_context.Composers, "Id", "Name", song.ComposerId);
+            ViewData["SingerId"] = new SelectList(_context.Singers, "Id", "Name", song.SingerId);
             return View(song);
         }
 
         // POST: Song/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,Lyrics,ThumbnailUrl,MP3Url,ReleaseDate,CreatedAt,UpdatedAt,SingerId,ComposerId,Status")] Song song)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Title,Lyrics,ThumbnailUrl,MP3Url,ThumbnailFile,MP3File,ReleaseDate,CreatedAt,UpdatedAt,SingerId,ComposerId,Status")] Song song)
         {
             if (id != song.Id)
             {
@@ -106,6 +150,45 @@ namespace Music_Management_System.Controllers
             {
                 try
                 {
+                    // Sanitize Lyrics
+                    song.Lyrics = Sanitizer.Sanitize(song.Lyrics);
+
+                    // Handle thumbnail upload
+                    if (song.ThumbnailFile != null && song.ThumbnailFile.Length > 0)
+                    {
+                        try
+                        {
+                            var photoResult = await _photoService.AddPhotoAsync(song.ThumbnailFile);
+                            song.ThumbnailUrl = photoResult.SecureUrl?.ToString() ?? photoResult.Url?.ToString() ?? string.Empty;
+                        }
+                        catch (Exception ex)
+                        {
+                            ModelState.AddModelError("ThumbnailFile", $"Thumbnail upload failed: {ex.Message}");
+                            ViewData["ComposerId"] = new SelectList(_context.Composers, "Id", "Name", song.ComposerId);
+                            ViewData["SingerId"] = new SelectList(_context.Singers, "Id", "Name", song.SingerId);
+                            return View(song);
+                        }
+                    }
+
+                    // Handle MP3 upload
+                    if (song.MP3File != null && song.MP3File.Length > 0)
+                    {
+                        try
+                        {
+                            var audioResult = await _mp3Service.AddAudioAsync(song.MP3File);
+                            song.MP3Url = audioResult.SecureUrl?.ToString() ?? audioResult.Url?.ToString() ?? string.Empty;
+                        }
+                        catch (Exception ex)
+                        {
+                            ModelState.AddModelError("MP3File", $"Audio upload failed: {ex.Message}");
+                            ViewData["ComposerId"] = new SelectList(_context.Composers, "Id", "Name", song.ComposerId);
+                            ViewData["SingerId"] = new SelectList(_context.Singers, "Id", "Name", song.SingerId);
+                            return View(song);
+                        }
+                    }
+
+                    song.UpdatedAt = DateTime.Now;
+
                     _context.Update(song);
                     await _context.SaveChangesAsync();
                 }
@@ -122,8 +205,8 @@ namespace Music_Management_System.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ComposerId"] = new SelectList(_context.Composers, "Id", "Biography", song.ComposerId);
-            ViewData["SingerId"] = new SelectList(_context.Singers, "Id", "Biography", song.SingerId);
+            ViewData["ComposerId"] = new SelectList(_context.Composers, "Id", "Name", song.ComposerId);
+            ViewData["SingerId"] = new SelectList(_context.Singers, "Id", "Name", song.SingerId);
             return View(song);
         }
 

@@ -2,21 +2,26 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Ganss.Xss;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Music_Management_System.Data;
 using Music_Management_System.Models;
+using Music_Management_System.Interfaces;
 
 namespace Music_Management_System.Controllers
 {
     public class ComposerController : Controller
     {
         private readonly AppDbContext _context;
+        private readonly IPhotoService _photoService;
+        private static readonly HtmlSanitizer Sanitizer = new HtmlSanitizer();
 
-        public ComposerController(AppDbContext context)
+        public ComposerController(AppDbContext context, IPhotoService photoService)
         {
             _context = context;
+            _photoService = photoService;
         }
 
         // GET: Composer
@@ -50,14 +55,30 @@ namespace Music_Management_System.Controllers
         }
 
         // POST: Composer/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Biography,ImageUrl")] Composer composer)
+        public async Task<IActionResult> Create([Bind("Id,Name,Biography,ImageFile")] Composer composer)
         {
             if (ModelState.IsValid)
             {
+                // Sanitize Biography
+                composer.Biography = Sanitizer.Sanitize(composer.Biography);
+
+                // Handle image upload
+                if (composer.ImageFile != null && composer.ImageFile.Length > 0)
+                {
+                    try
+                    {
+                        var result = await _photoService.AddPhotoAsync(composer.ImageFile);
+                        composer.ImageUrl = result.SecureUrl?.ToString() ?? result.Url?.ToString() ?? string.Empty;
+                    }
+                    catch (Exception ex)
+                    {
+                        ModelState.AddModelError("ImageFile", $"Image upload failed: {ex.Message}");
+                        return View(composer);
+                    }
+                }
+
                 _context.Add(composer);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -82,11 +103,9 @@ namespace Music_Management_System.Controllers
         }
 
         // POST: Composer/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Biography,ImageUrl")] Composer composer)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Biography,ImageUrl,ImageFile")] Composer composer)
         {
             if (id != composer.Id)
             {
@@ -97,6 +116,24 @@ namespace Music_Management_System.Controllers
             {
                 try
                 {
+                    // Sanitize Biography
+                    composer.Biography = Sanitizer.Sanitize(composer.Biography);
+
+                    // Handle image upload
+                    if (composer.ImageFile != null && composer.ImageFile.Length > 0)
+                    {
+                        try
+                        {
+                            var result = await _photoService.AddPhotoAsync(composer.ImageFile);
+                            composer.ImageUrl = result.SecureUrl?.ToString() ?? result.Url?.ToString() ?? string.Empty;
+                        }
+                        catch (Exception ex)
+                        {
+                            ModelState.AddModelError("ImageFile", $"Image upload failed: {ex.Message}");
+                            return View(composer);
+                        }
+                    }
+
                     _context.Update(composer);
                     await _context.SaveChangesAsync();
                 }
