@@ -8,26 +8,32 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
 
 builder.Services.Configure<CloudinarySettings>(builder.Configuration.GetSection("CloudinarySettings"));
 
-// Register services with their interfaces
-builder.Services.AddScoped<IMp3Service, Mp3Service>();  // Changed from IMP3Service to IMp3Service
+// Register services
+builder.Services.AddScoped<IMp3Service, Mp3Service>();
 builder.Services.AddScoped<IPhotoService, PhotoService>();
 
 var app = builder.Build();
+
+// ==================== DATABASE SEEDING ====================
+if (app.Environment.IsDevelopment())
+{
+    Console.WriteLine("🌱 Starting database seeding in Development mode...");
+    DbInitializer.Seed(app);
+}
+// ========================================================
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
     app.UseHsts();
-    
-    // Gọi DbInitializer
-    DbInitializer.Seed(app);
 }
 
 app.UseHttpsRedirection();

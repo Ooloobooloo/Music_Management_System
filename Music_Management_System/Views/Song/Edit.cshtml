@@ -1,8 +1,8 @@
 @model Music_Management_System.Models.Song
 
 @{
-ViewData["Title"] = "Edit Song";
-Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Edit Song";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <div class="page-hero" style="margin-bottom: 1.75rem;">
@@ -36,11 +36,11 @@ Layout = "~/Views/Shared/_Layout.cshtml";
                        class="form-control" accept="image/*" />
                 @if (!string.IsNullOrEmpty(Model.ThumbnailUrl))
                 {
-                <small class="form-text">Current: <a href="@Model.ThumbnailUrl" target="_blank">view image</a> — upload a new file to replace it</small>
+                    <small class="form-text">Current: <a href="@Model.ThumbnailUrl" target="_blank">view image</a> — upload a new file to replace it</small>
                 }
                 else
                 {
-                <small class="form-text">JPG, PNG, or WEBP (optional)</small>
+                    <small class="form-text">JPG, PNG, or WEBP (optional)</small>
                 }
             </div>
 
@@ -50,11 +50,11 @@ Layout = "~/Views/Shared/_Layout.cshtml";
                        class="form-control" accept="audio/mpeg,.mp3" />
                 @if (!string.IsNullOrEmpty(Model.MP3Url))
                 {
-                <small class="form-text">Current file exists — upload a new MP3 to replace it</small>
+                    <small class="form-text">Current file exists — upload a new MP3 to replace it</small>
                 }
                 else
                 {
-                <small class="form-text">Upload an MP3 to enable in-browser playback (optional)</small>
+                    <small class="form-text">Upload an MP3 to enable in-browser playback (optional)</small>
                 }
             </div>
 
@@ -92,14 +92,14 @@ Layout = "~/Views/Shared/_Layout.cshtml";
 </div>
 
 @section Scripts {
-<script src="https://cdn.ckeditor.com/ckeditor5/41.0.0/classic/ckeditor.js"></script>
-<script>
-    ClassicEditor
-        .create(document.querySelector('#editor'), {
-            toolbar: ['heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', 'blockQuote', 'insertTable', 'undo', 'redo']
-        })
-        .then(editor => console.log('CKEditor initialized', editor))
-        .catch(error => console.error(error));
-</script>
-<partial name="_ValidationScriptsPartial" />
+    <script src="https://cdn.ckeditor.com/ckeditor5/41.0.0/classic/ckeditor.js"></script>
+    <script>
+        ClassicEditor
+            .create(document.querySelector('#editor'), {
+                toolbar: ['heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', 'blockQuote', 'insertTable', 'undo', 'redo']
+            })
+            .then(editor => console.log('CKEditor initialized', editor))
+            .catch(error => console.error(error));
+    </script>
+    <partial name="_ValidationScriptsPartial" />
 }

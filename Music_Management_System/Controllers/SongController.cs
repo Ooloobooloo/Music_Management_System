@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Ganss.Xss;
@@ -29,26 +28,38 @@ namespace Music_Management_System.Controllers
         // GET: Song
         public async Task<IActionResult> Index()
         {
-            var appDbContext = _context.Songs.Include(s => s.Composer).Include(s => s.Singer);
-            return View(await appDbContext.ToListAsync());
+            var songs = await _context.Songs
+                .Include(s => s.Composer)
+                .Include(s => s.Singer)
+                .ToListAsync();
+
+            Console.WriteLine($"📊 Total songs found: {songs.Count}");
+            if (songs.Count == 0)
+            {
+                Console.WriteLine("⚠️ No songs in database!");
+            }
+            else
+            {
+                foreach (var song in songs.Take(5))
+                {
+                    Console.WriteLine($"Song: {song.Title} | Singer: {song.Singer?.Name} | Status: {song.Status}");
+                }
+            }
+
+            return View(songs);
         }
 
         // GET: Song/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            if (id == null) return NotFound();
 
             var song = await _context.Songs
                 .Include(s => s.Composer)
                 .Include(s => s.Singer)
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (song == null)
-            {
-                return NotFound();
-            }
+
+            if (song == null) return NotFound();
 
             return View(song);
         }
@@ -82,8 +93,7 @@ namespace Music_Management_System.Controllers
                     catch (Exception ex)
                     {
                         ModelState.AddModelError("ThumbnailFile", $"Thumbnail upload failed: {ex.Message}");
-                        ViewData["ComposerId"] = new SelectList(_context.Composers, "Id", "Name", song.ComposerId);
-                        ViewData["SingerId"] = new SelectList(_context.Singers, "Id", "Name", song.SingerId);
+                        PrepareViewData(song);
                         return View(song);
                     }
                 }
@@ -99,12 +109,12 @@ namespace Music_Management_System.Controllers
                     catch (Exception ex)
                     {
                         ModelState.AddModelError("MP3File", $"Audio upload failed: {ex.Message}");
-                        ViewData["ComposerId"] = new SelectList(_context.Composers, "Id", "Name", song.ComposerId);
-                        ViewData["SingerId"] = new SelectList(_context.Singers, "Id", "Name", song.SingerId);
+                        PrepareViewData(song);
                         return View(song);
                     }
                 }
 
+                // Auto set dates on creation
                 song.CreatedAt = DateTime.Now;
                 song.UpdatedAt = DateTime.Now;
 
@@ -113,24 +123,18 @@ namespace Music_Management_System.Controllers
                 return RedirectToAction(nameof(Index));
             }
 
-            ViewData["ComposerId"] = new SelectList(_context.Composers, "Id", "Name", song.ComposerId);
-            ViewData["SingerId"] = new SelectList(_context.Singers, "Id", "Name", song.SingerId);
+            PrepareViewData(song);
             return View(song);
         }
 
         // GET: Song/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            if (id == null) return NotFound();
 
             var song = await _context.Songs.FindAsync(id);
-            if (song == null)
-            {
-                return NotFound();
-            }
+            if (song == null) return NotFound();
+
             ViewData["ComposerId"] = new SelectList(_context.Composers, "Id", "Name", song.ComposerId);
             ViewData["SingerId"] = new SelectList(_context.Singers, "Id", "Name", song.SingerId);
             return View(song);
@@ -141,13 +145,8 @@ namespace Music_Management_System.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Title,Lyrics,ThumbnailUrl,MP3Url,ThumbnailFile,MP3File,ReleaseDate,CreatedAt,UpdatedAt,SingerId,ComposerId,Status")] Song song)
         {
-            if (id != song.Id)
-            {
-                return NotFound();
-            }
-            foreach (var kvp in ModelState)
-            foreach (var err in kvp.Value.Errors)
-                Console.WriteLine($"❌ {kvp.Key}: {err.ErrorMessage}");
+            if (id != song.Id) return NotFound();
+
             if (ModelState.IsValid)
             {
                 try
@@ -155,7 +154,7 @@ namespace Music_Management_System.Controllers
                     // Sanitize Lyrics
                     song.Lyrics = Sanitizer.Sanitize(song.Lyrics);
 
-                    // Handle thumbnail upload
+                    // Handle thumbnail upload (if new file selected)
                     if (song.ThumbnailFile != null && song.ThumbnailFile.Length > 0)
                     {
                         try
@@ -166,13 +165,12 @@ namespace Music_Management_System.Controllers
                         catch (Exception ex)
                         {
                             ModelState.AddModelError("ThumbnailFile", $"Thumbnail upload failed: {ex.Message}");
-                            ViewData["ComposerId"] = new SelectList(_context.Composers, "Id", "Name", song.ComposerId);
-                            ViewData["SingerId"] = new SelectList(_context.Singers, "Id", "Name", song.SingerId);
+                            PrepareViewData(song);
                             return View(song);
                         }
                     }
 
-                    // Handle MP3 upload
+                    // Handle MP3 upload (if new file selected)
                     if (song.MP3File != null && song.MP3File.Length > 0)
                     {
                         try
@@ -183,51 +181,43 @@ namespace Music_Management_System.Controllers
                         catch (Exception ex)
                         {
                             ModelState.AddModelError("MP3File", $"Audio upload failed: {ex.Message}");
-                            ViewData["ComposerId"] = new SelectList(_context.Composers, "Id", "Name", song.ComposerId);
-                            ViewData["SingerId"] = new SelectList(_context.Singers, "Id", "Name", song.SingerId);
+                            PrepareViewData(song);
                             return View(song);
                         }
                     }
 
+                    // Auto update UpdatedAt on every edit
                     song.UpdatedAt = DateTime.Now;
 
                     _context.Update(song);
                     await _context.SaveChangesAsync();
+
+                    return RedirectToAction(nameof(Index));
                 }
                 catch (DbUpdateConcurrencyException)
                 {
                     if (!SongExists(song.Id))
-                    {
                         return NotFound();
-                    }
                     else
-                    {
                         throw;
-                    }
                 }
-                return RedirectToAction(nameof(Index));
             }
-            ViewData["ComposerId"] = new SelectList(_context.Composers, "Id", "Name", song.ComposerId);
-            ViewData["SingerId"] = new SelectList(_context.Singers, "Id", "Name", song.SingerId);
+
+            PrepareViewData(song);
             return View(song);
         }
 
         // GET: Song/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            if (id == null) return NotFound();
 
             var song = await _context.Songs
                 .Include(s => s.Composer)
                 .Include(s => s.Singer)
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (song == null)
-            {
-                return NotFound();
-            }
+
+            if (song == null) return NotFound();
 
             return View(song);
         }
@@ -241,15 +231,21 @@ namespace Music_Management_System.Controllers
             if (song != null)
             {
                 _context.Songs.Remove(song);
+                await _context.SaveChangesAsync();
             }
-
-            await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool SongExists(int id)
         {
             return _context.Songs.Any(e => e.Id == id);
+        }
+
+        // Helper method to reduce duplication
+        private void PrepareViewData(Song song)
+        {
+            ViewData["ComposerId"] = new SelectList(_context.Composers, "Id", "Name", song.ComposerId);
+            ViewData["SingerId"] = new SelectList(_context.Singers, "Id", "Name", song.SingerId);
         }
     }
 }
