@@ -1,10 +1,8 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Ganss.Xss;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Music_Management_System.Data;
 using Music_Management_System.Models;
@@ -24,26 +22,45 @@ namespace Music_Management_System.Controllers
             _photoService = photoService;
         }
 
-        // GET: Singer
-        public async Task<IActionResult> Index()
+        // GET: Singer (with Search & Pagination)
+        public async Task<IActionResult> Index(string searchTerm, int page = 1)
         {
-            return View(await _context.Singers.ToListAsync());
+            int pageSize = 12;
+
+            var query = _context.Singers.AsQueryable();
+
+            if (!string.IsNullOrEmpty(searchTerm))
+            {
+                searchTerm = searchTerm.Trim();
+                query = query.Where(s => 
+                    s.Name.Contains(searchTerm) || 
+                    (s.Biography != null && s.Biography.Contains(searchTerm)));
+            }
+
+            var totalItems = await query.CountAsync();
+            var totalPages = (int)Math.Ceiling(totalItems / (double)pageSize);
+
+            var singers = await query
+                .OrderBy(s => s.Name)
+                .Skip((page - 1) * pageSize)
+                .Take(pageSize)
+                .ToListAsync();
+
+            ViewBag.SearchTerm = searchTerm;
+            ViewBag.CurrentPage = page;
+            ViewBag.TotalPages = totalPages;
+            ViewBag.TotalItems = totalItems;
+
+            return View(singers);
         }
 
         // GET: Singer/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            if (id == null) return NotFound();
 
-            var singer = await _context.Singers
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (singer == null)
-            {
-                return NotFound();
-            }
+            var singer = await _context.Singers.FirstOrDefaultAsync(m => m.Id == id);
+            if (singer == null) return NotFound();
 
             return View(singer);
         }
@@ -61,10 +78,8 @@ namespace Music_Management_System.Controllers
         {
             if (ModelState.IsValid)
             {
-                // Sanitize Biography
                 singer.Biography = Sanitizer.Sanitize(singer.Biography);
 
-                // Handle image upload
                 if (singer.ImageFile != null && singer.ImageFile.Length > 0)
                 {
                     try
@@ -89,16 +104,11 @@ namespace Music_Management_System.Controllers
         // GET: Singer/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            if (id == null) return NotFound();
 
             var singer = await _context.Singers.FindAsync(id);
-            if (singer == null)
-            {
-                return NotFound();
-            }
+            if (singer == null) return NotFound();
+
             return View(singer);
         }
 
@@ -107,31 +117,18 @@ namespace Music_Management_System.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Biography,ImageUrl,ImageFile")] Singer singer)
         {
-            if (id != singer.Id)
-            {
-                return NotFound();
-            }
+            if (id != singer.Id) return NotFound();
 
             if (ModelState.IsValid)
             {
                 try
                 {
-                    // Sanitize Biography
                     singer.Biography = Sanitizer.Sanitize(singer.Biography);
 
-                    // Handle image upload
                     if (singer.ImageFile != null && singer.ImageFile.Length > 0)
                     {
-                        try
-                        {
-                            var result = await _photoService.AddPhotoAsync(singer.ImageFile);
-                            singer.ImageUrl = result.SecureUrl?.ToString() ?? result.Url?.ToString() ?? string.Empty;
-                        }
-                        catch (Exception ex)
-                        {
-                            ModelState.AddModelError("ImageFile", $"Image upload failed: {ex.Message}");
-                            return View(singer);
-                        }
+                        var result = await _photoService.AddPhotoAsync(singer.ImageFile);
+                        singer.ImageUrl = result.SecureUrl?.ToString() ?? result.Url?.ToString() ?? string.Empty;
                     }
 
                     _context.Update(singer);
@@ -140,13 +137,9 @@ namespace Music_Management_System.Controllers
                 catch (DbUpdateConcurrencyException)
                 {
                     if (!SingerExists(singer.Id))
-                    {
                         return NotFound();
-                    }
                     else
-                    {
                         throw;
-                    }
                 }
                 return RedirectToAction(nameof(Index));
             }
@@ -156,17 +149,10 @@ namespace Music_Management_System.Controllers
         // GET: Singer/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            if (id == null) return NotFound();
 
-            var singer = await _context.Singers
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (singer == null)
-            {
-                return NotFound();
-            }
+            var singer = await _context.Singers.FirstOrDefaultAsync(m => m.Id == id);
+            if (singer == null) return NotFound();
 
             return View(singer);
         }
@@ -180,9 +166,8 @@ namespace Music_Management_System.Controllers
             if (singer != null)
             {
                 _context.Singers.Remove(singer);
+                await _context.SaveChangesAsync();
             }
-
-            await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 

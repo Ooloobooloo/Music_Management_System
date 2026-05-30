@@ -16,9 +16,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c68eb64f-76a7-4962-8df7-842505f39a63" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/Music_Management_System/Controllers/SongController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Music_Management_System/Controllers/SongController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Music_Management_System/Models/Song.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Music_Management_System/Models/Song.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Music_Management_System/Views/Song/Create.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/Music_Management_System/Views/Song/Create.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Music_Management_System/Controllers/ComposerController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Music_Management_System/Controllers/ComposerController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Music_Management_System/Controllers/SingerController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Music_Management_System/Controllers/SingerController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Music_Management_System/Views/Composer/Index.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/Music_Management_System/Views/Composer/Index.cshtml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Music_Management_System/Views/Singer/Index.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/Music_Management_System/Views/Singer/Index.cshtml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -220,7 +221,7 @@
       <workItem from="1780054455743" duration="2622000" />
       <workItem from="1780057142439" duration="5466000" />
       <workItem from="1780112194567" duration="7749000" />
-      <workItem from="1780123651123" duration="2187000" />
+      <workItem from="1780123651123" duration="2912000" />
     </task>
     <task id="LOCAL-00001" summary="First Commit">
       <option name="closed" value="true" />
@@ -342,7 +343,23 @@
       <option name="project" value="LOCAL" />
       <updated>1780125357426</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="Still cant use the seeder properly">
+      <option name="closed" value="true" />
+      <created>1780125887940</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1780125887940</updated>
+    </task>
+    <task id="LOCAL-00017" summary="Adding Searchbar and Pagination">
+      <option name="closed" value="true" />
+      <created>1780126088500</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1780126088500</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -366,7 +383,9 @@
     <MESSAGE value="Re-calibrate Uploading services" />
     <MESSAGE value="Sanitizing Html" />
     <MESSAGE value="Seeding tryout" />
-    <option name="LAST_COMMIT_MESSAGE" value="Seeding tryout" />
+    <MESSAGE value="Still cant use the seeder properly" />
+    <MESSAGE value="Adding Searchbar and Pagination" />
+    <option name="LAST_COMMIT_MESSAGE" value="Adding Searchbar and Pagination" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
