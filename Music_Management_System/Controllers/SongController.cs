@@ -33,19 +33,7 @@ namespace Music_Management_System.Controllers
                 .Include(s => s.Singer)
                 .ToListAsync();
 
-            Console.WriteLine($"📊 Total songs found: {songs.Count}");
-            if (songs.Count == 0)
-            {
-                Console.WriteLine("⚠️ No songs in database!");
-            }
-            else
-            {
-                foreach (var song in songs.Take(5))
-                {
-                    Console.WriteLine($"Song: {song.Title} | Singer: {song.Singer?.Name} | Status: {song.Status}");
-                }
-            }
-
+            Console.WriteLine($"📊 Total songs in database: {songs.Count}");
             return View(songs);
         }
 
@@ -79,48 +67,54 @@ namespace Music_Management_System.Controllers
         {
             if (ModelState.IsValid)
             {
-                // Sanitize Lyrics
-                song.Lyrics = Sanitizer.Sanitize(song.Lyrics);
-
-                // Handle thumbnail upload
-                if (song.ThumbnailFile != null && song.ThumbnailFile.Length > 0)
+                try
                 {
-                    try
+                    // Sanitize Lyrics
+                    song.Lyrics = Sanitizer.Sanitize(song.Lyrics);
+
+                    // Handle thumbnail upload
+                    if (song.ThumbnailFile != null && song.ThumbnailFile.Length > 0)
                     {
                         var photoResult = await _photoService.AddPhotoAsync(song.ThumbnailFile);
                         song.ThumbnailUrl = photoResult.SecureUrl?.ToString() ?? photoResult.Url?.ToString() ?? string.Empty;
                     }
-                    catch (Exception ex)
-                    {
-                        ModelState.AddModelError("ThumbnailFile", $"Thumbnail upload failed: {ex.Message}");
-                        PrepareViewData(song);
-                        return View(song);
-                    }
-                }
 
-                // Handle MP3 upload
-                if (song.MP3File != null && song.MP3File.Length > 0)
-                {
-                    try
+                    // Handle MP3 upload
+                    if (song.MP3File != null && song.MP3File.Length > 0)
                     {
                         var audioResult = await _mp3Service.AddAudioAsync(song.MP3File);
                         song.MP3Url = audioResult.SecureUrl?.ToString() ?? audioResult.Url?.ToString() ?? string.Empty;
                     }
-                    catch (Exception ex)
+
+                    // Auto set dates
+                    song.CreatedAt = DateTime.Now;
+                    song.UpdatedAt = DateTime.Now;
+
+                    _context.Add(song);
+                    await _context.SaveChangesAsync();
+
+                    Console.WriteLine($"✅ Song created successfully: {song.Title} (ID: {song.Id})");
+                    return RedirectToAction(nameof(Index));
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"❌ Error creating song: {ex.Message}");
+                    if (ex.InnerException != null)
+                        Console.WriteLine($"   Inner: {ex.InnerException.Message}");
+
+                    ModelState.AddModelError("", $"Failed to save song: {ex.Message}");
+                }
+            }
+            else
+            {
+                Console.WriteLine("❌ ModelState is invalid:");
+                foreach (var state in ModelState)
+                {
+                    if (state.Value.Errors.Count > 0)
                     {
-                        ModelState.AddModelError("MP3File", $"Audio upload failed: {ex.Message}");
-                        PrepareViewData(song);
-                        return View(song);
+                        Console.WriteLine($"   {state.Key}: {string.Join(", ", state.Value.Errors.Select(e => e.ErrorMessage))}");
                     }
                 }
-
-                // Auto set dates on creation
-                song.CreatedAt = DateTime.Now;
-                song.UpdatedAt = DateTime.Now;
-
-                _context.Add(song);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
             }
 
             PrepareViewData(song);
@@ -151,42 +145,20 @@ namespace Music_Management_System.Controllers
             {
                 try
                 {
-                    // Sanitize Lyrics
                     song.Lyrics = Sanitizer.Sanitize(song.Lyrics);
 
-                    // Handle thumbnail upload (if new file selected)
                     if (song.ThumbnailFile != null && song.ThumbnailFile.Length > 0)
                     {
-                        try
-                        {
-                            var photoResult = await _photoService.AddPhotoAsync(song.ThumbnailFile);
-                            song.ThumbnailUrl = photoResult.SecureUrl?.ToString() ?? photoResult.Url?.ToString() ?? string.Empty;
-                        }
-                        catch (Exception ex)
-                        {
-                            ModelState.AddModelError("ThumbnailFile", $"Thumbnail upload failed: {ex.Message}");
-                            PrepareViewData(song);
-                            return View(song);
-                        }
+                        var photoResult = await _photoService.AddPhotoAsync(song.ThumbnailFile);
+                        song.ThumbnailUrl = photoResult.SecureUrl?.ToString() ?? photoResult.Url?.ToString() ?? string.Empty;
                     }
 
-                    // Handle MP3 upload (if new file selected)
                     if (song.MP3File != null && song.MP3File.Length > 0)
                     {
-                        try
-                        {
-                            var audioResult = await _mp3Service.AddAudioAsync(song.MP3File);
-                            song.MP3Url = audioResult.SecureUrl?.ToString() ?? audioResult.Url?.ToString() ?? string.Empty;
-                        }
-                        catch (Exception ex)
-                        {
-                            ModelState.AddModelError("MP3File", $"Audio upload failed: {ex.Message}");
-                            PrepareViewData(song);
-                            return View(song);
-                        }
+                        var audioResult = await _mp3Service.AddAudioAsync(song.MP3File);
+                        song.MP3Url = audioResult.SecureUrl?.ToString() ?? audioResult.Url?.ToString() ?? string.Empty;
                     }
 
-                    // Auto update UpdatedAt on every edit
                     song.UpdatedAt = DateTime.Now;
 
                     _context.Update(song);
@@ -194,12 +166,10 @@ namespace Music_Management_System.Controllers
 
                     return RedirectToAction(nameof(Index));
                 }
-                catch (DbUpdateConcurrencyException)
+                catch (Exception ex)
                 {
-                    if (!SongExists(song.Id))
-                        return NotFound();
-                    else
-                        throw;
+                    Console.WriteLine($"❌ Error updating song: {ex.Message}");
+                    ModelState.AddModelError("", $"Failed to update song: {ex.Message}");
                 }
             }
 
@@ -241,7 +211,6 @@ namespace Music_Management_System.Controllers
             return _context.Songs.Any(e => e.Id == id);
         }
 
-        // Helper method to reduce duplication
         private void PrepareViewData(Song song)
         {
             ViewData["ComposerId"] = new SelectList(_context.Composers, "Id", "Name", song.ComposerId);

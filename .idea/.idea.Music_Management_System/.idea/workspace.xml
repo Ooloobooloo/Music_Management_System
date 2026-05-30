@@ -16,13 +16,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c68eb64f-76a7-4962-8df7-842505f39a63" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Music_Management_System/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Music_Management_System/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Music_Management_System/Controllers/SongController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Music_Management_System/Controllers/SongController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Music_Management_System/Data/DbInitializer.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Music_Management_System/Data/DbInitializer.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Music_Management_System/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Music_Management_System/Program.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Music_Management_System/Models/Song.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Music_Management_System/Models/Song.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Music_Management_System/Views/Song/Create.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/Music_Management_System/Views/Song/Create.cshtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Music_Management_System/Views/Song/Details.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/Music_Management_System/Views/Song/Details.cshtml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Music_Management_System/Views/Song/Edit.cshtml" beforeDir="false" afterPath="$PROJECT_DIR$/Music_Management_System/Views/Song/Edit.cshtml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -224,7 +220,7 @@
       <workItem from="1780054455743" duration="2622000" />
       <workItem from="1780057142439" duration="5466000" />
       <workItem from="1780112194567" duration="7749000" />
-      <workItem from="1780123651123" duration="1680000" />
+      <workItem from="1780123651123" duration="2187000" />
     </task>
     <task id="LOCAL-00001" summary="First Commit">
       <option name="closed" value="true" />
@@ -338,7 +334,15 @@
       <option name="project" value="LOCAL" />
       <updated>1780114482321</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="Seeding tryout">
+      <option name="closed" value="true" />
+      <created>1780125357425</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1780125357426</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -361,7 +365,8 @@
     <MESSAGE value="Service Update" />
     <MESSAGE value="Re-calibrate Uploading services" />
     <MESSAGE value="Sanitizing Html" />
-    <option name="LAST_COMMIT_MESSAGE" value="Sanitizing Html" />
+    <MESSAGE value="Seeding tryout" />
+    <option name="LAST_COMMIT_MESSAGE" value="Seeding tryout" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

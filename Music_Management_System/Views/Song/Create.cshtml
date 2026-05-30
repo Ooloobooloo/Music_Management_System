@@ -19,7 +19,7 @@
 
             <div class="form-group">
                 <label asp-for="Title" class="control-label">Song Title</label>
-                <input asp-for="Title" class="form-control" placeholder="e.g. Autumn Leaves" />
+                <input asp-for="Title" class="form-control" placeholder="e.g. Chungus Anthem" />
                 <span asp-validation-for="Title" class="text-danger"></span>
             </div>
 
@@ -53,17 +53,26 @@
             <div class="row g-3">
                 <div class="col-sm-6 form-group">
                     <label asp-for="SingerId" class="control-label">Singer</label>
-                    <select asp-for="SingerId" class="form-control" asp-items="ViewBag.SingerId"></select>
+                    <select asp-for="SingerId" class="form-control" asp-items="ViewBag.SingerId">
+                        <option value="">-- Select Singer --</option>
+                    </select>
+                    <span asp-validation-for="SingerId" class="text-danger"></span>
                 </div>
                 <div class="col-sm-6 form-group">
                     <label asp-for="ComposerId" class="control-label">Composer</label>
-                    <select asp-for="ComposerId" class="form-control" asp-items="ViewBag.ComposerId"></select>
+                    <select asp-for="ComposerId" class="form-control" asp-items="ViewBag.ComposerId">
+                        <option value="">-- Select Composer --</option>
+                    </select>
+                    <span asp-validation-for="ComposerId" class="text-danger"></span>
                 </div>
             </div>
 
             <div class="form-group">
                 <label asp-for="Status" class="control-label">Status</label>
-                <input asp-for="Status" class="form-control" placeholder="e.g. Published, Draft" />
+                <select asp-for="Status" class="form-control">
+                    <option value="1">Active</option>
+                    <option value="0">Inactive</option>
+                </select>
                 <span asp-validation-for="Status" class="text-danger"></span>
             </div>
 
