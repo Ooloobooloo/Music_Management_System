@@ -25,15 +25,42 @@ namespace Music_Management_System.Controllers
             _mp3Service = mp3Service;
         }
 
-        // GET: Song
-        public async Task<IActionResult> Index()
+        // GET: Song/Index (with Search & Pagination)
+        public async Task<IActionResult> Index(string searchTerm, int page = 1)
         {
-            var songs = await _context.Songs
-                .Include(s => s.Composer)
+            int pageSize = 12; // You can change this
+
+            var query = _context.Songs
                 .Include(s => s.Singer)
+                .Include(s => s.Composer)
+                .Where(s => s.Status == 1); // Only show active songs
+
+            if (!string.IsNullOrEmpty(searchTerm))
+            {
+                searchTerm = searchTerm.Trim();
+                query = query.Where(s => 
+                    s.Title.Contains(searchTerm) ||
+                    (s.Singer != null && s.Singer.Name.Contains(searchTerm)) ||
+                    (s.Composer != null && s.Composer.Name.Contains(searchTerm)));
+            }
+
+            var totalItems = await query.CountAsync();
+            var totalPages = (int)Math.Ceiling(totalItems / (double)pageSize);
+
+            var songs = await query
+                .OrderByDescending(s => s.CreatedAt)
+                .Skip((page - 1) * pageSize)
+                .Take(pageSize)
                 .ToListAsync();
 
-            Console.WriteLine($"📊 Total songs in database: {songs.Count}");
+            // Pass data to View
+            ViewBag.SearchTerm = searchTerm;
+            ViewBag.CurrentPage = page;
+            ViewBag.TotalPages = totalPages;
+            ViewBag.TotalItems = totalItems;
+
+            Console.WriteLine($"📊 Showing page {page} of {totalPages} | Total songs: {totalItems}");
+
             return View(songs);
         }
 
@@ -69,24 +96,20 @@ namespace Music_Management_System.Controllers
             {
                 try
                 {
-                    // Sanitize Lyrics
                     song.Lyrics = Sanitizer.Sanitize(song.Lyrics);
 
-                    // Handle thumbnail upload
                     if (song.ThumbnailFile != null && song.ThumbnailFile.Length > 0)
                     {
                         var photoResult = await _photoService.AddPhotoAsync(song.ThumbnailFile);
                         song.ThumbnailUrl = photoResult.SecureUrl?.ToString() ?? photoResult.Url?.ToString() ?? string.Empty;
                     }
 
-                    // Handle MP3 upload
                     if (song.MP3File != null && song.MP3File.Length > 0)
                     {
                         var audioResult = await _mp3Service.AddAudioAsync(song.MP3File);
                         song.MP3Url = audioResult.SecureUrl?.ToString() ?? audioResult.Url?.ToString() ?? string.Empty;
                     }
 
-                    // Auto set dates
                     song.CreatedAt = DateTime.Now;
                     song.UpdatedAt = DateTime.Now;
 
@@ -99,21 +122,7 @@ namespace Music_Management_System.Controllers
                 catch (Exception ex)
                 {
                     Console.WriteLine($"❌ Error creating song: {ex.Message}");
-                    if (ex.InnerException != null)
-                        Console.WriteLine($"   Inner: {ex.InnerException.Message}");
-
                     ModelState.AddModelError("", $"Failed to save song: {ex.Message}");
-                }
-            }
-            else
-            {
-                Console.WriteLine("❌ ModelState is invalid:");
-                foreach (var state in ModelState)
-                {
-                    if (state.Value.Errors.Count > 0)
-                    {
-                        Console.WriteLine($"   {state.Key}: {string.Join(", ", state.Value.Errors.Select(e => e.ErrorMessage))}");
-                    }
                 }
             }
 
